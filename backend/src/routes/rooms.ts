@@ -186,11 +186,12 @@ router.get('/:code/leaderboard', async (req: Request, res: Response) => {
     }
 
     const sortedPlayers = room.players
-      .sort((a, b) => b.score - a.score)
-      .map((player, index) => ({
-        ...player.toObject(),
+    .sort((a, b) => b.score - a.score)
+    .map((player, index) => ({
+        ...player,
         rank: index + 1
-      }));
+    }));
+
 
     res.json({
       leaderboard: sortedPlayers,
