@@ -6,8 +6,20 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import roomRoutes from './routes/rooms';
 import taskRoutes from './routes/tasks';
+import path from 'path';
+import fs from 'fs'; 
+
 
 dotenv.config();
+
+const corsOptions = {
+  origin: process.env.NODE_ENV === 'production' 
+    ? ['https://your-flutter-app.com'] // Add your Flutter app domains
+    : "*",
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true
+};
+
 
 const app = express();
 const server = http.createServer(app);
@@ -18,7 +30,13 @@ const io = new Server(server, {
   }
 });
 
+const uploadsDir = path.join(__dirname, '..', 'uploads');
+if (!fs.existsSync(uploadsDir)) {
+  fs.mkdirSync(uploadsDir, { recursive: true });
+}
+
 // Middleware
+app.use(cors(corsOptions));
 app.use(cors());
 app.use(express.json());
 app.use('/uploads', express.static('uploads'));
@@ -44,6 +62,10 @@ io.on('connection', (socket) => {
   socket.on('disconnect', () => {
     console.log('User disconnected:', socket.id);
   });
+});
+
+app.get('/health', (req, res) => {
+  res.status(200).json({ status: 'OK', timestamp: new Date().toISOString() });
 });
 
 // Make io accessible to routes

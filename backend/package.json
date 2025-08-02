@@ -6,8 +6,12 @@
   "scripts": {
     "dev": "nodemon src/server.ts",
     "build": "tsc",
-    "start": "node dist/server.js"
+    "start": "node dist/server.js",
+    "postbuild": "cp -r uploads dist/ || xcopy uploads dist\\uploads /E /I"
   },
+  "engines": {
+    "node": "18.x"
+  }
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^16.6.1",
