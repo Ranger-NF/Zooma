@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import '../services/game_service.dart';
 import 'create_room_screen.dart';
 import 'join_room_screen.dart';
 import 'leaderboard_screen.dart';

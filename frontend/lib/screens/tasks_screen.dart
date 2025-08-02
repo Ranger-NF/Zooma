@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:image_picker/image_picker.dart';
 import '../services/game_service.dart';
-import '../models/game_models.dart';
 
 class TasksScreen extends StatefulWidget {
   @override
