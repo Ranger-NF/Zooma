@@ -180,17 +180,6 @@ flutter test
 flutter integration_test
 ```
 
-## 🚀 Deployment
-
-### Backend Deployment (Heroku Example)
-
-```bash
-# Install Heroku CLI
-heroku create your-app-name
-heroku config:set MONGODB_URI=your_mongodb_atlas_uri
-git push heroku main
-```
-
 ### Mobile App Deployment
 
 1. **Android**: Build APK and upload to Google Play Store
