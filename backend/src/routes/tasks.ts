@@ -1,8 +1,7 @@
 import express, { Request, Response } from 'express';
-import type { File as MulterFile } from 'multer';
 import multer from 'multer';
 import sharp from 'sharp';
-import path from 'path';
+//import path from 'path';
 import fs from 'fs';
 import { Room } from '../models/Room';
 
@@ -10,28 +9,22 @@ const router = express.Router();
 
 // Configure multer for file uploads
 const storage = multer.diskStorage({
-  destination: (_req, _file, cb) => {
+  destination: (
+    req: Request,
+    file: Express.Multer.File,
+    cb: (error: Error | null, destination: string) => void
+  ) => {
     cb(null, 'uploads/tasks');
   },
-  filename: (_req, file, cb) => {
+  filename: (
+    req: Request,
+    file: Express.Multer.File,
+    cb: (error: Error | null, filename: string) => void
+  ) => {
     cb(null, Date.now() + '-' + file.originalname);
   }
-
-  // destination: (
-  //   req: Request, 
-  //   file: Express.Multer.File, 
-  //   cb: (error: Error | null, destination: string) => void) => {
-  //   const uploadDir = 'uploads/tasks';
-  //   if (!fs.existsSync(uploadDir)) {
-  //     fs.mkdirSync(uploadDir, { recursive: true });
-  //   }
-  //   cb(null, uploadDir);
-  // },
-  // filename: (req, file, cb) => {
-  //   const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
-  //   cb(null, `task-${uniqueSuffix}${path.extname(file.originalname)}`);
-  // }
 });
+
 
 const upload = multer({
   storage: storage,
