@@ -1,4 +1,5 @@
 import express, { Request, Response } from 'express';
+import type { File as MulterFile } from 'multer';
 import multer from 'multer';
 import sharp from 'sharp';
 import path from 'path';
@@ -9,20 +10,27 @@ const router = express.Router();
 
 // Configure multer for file uploads
 const storage = multer.diskStorage({
-  destination: (
-    req: Request, 
-    file: Express.Multer.File, 
-    cb: (error: Error | null, destination: string) => void) => {
-    const uploadDir = 'uploads/tasks';
-    if (!fs.existsSync(uploadDir)) {
-      fs.mkdirSync(uploadDir, { recursive: true });
-    }
-    cb(null, uploadDir);
+  destination: (_req, _file, cb) => {
+    cb(null, 'uploads/tasks');
   },
-  filename: (req, file, cb) => {
-    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
-    cb(null, `task-${uniqueSuffix}${path.extname(file.originalname)}`);
+  filename: (_req, file, cb) => {
+    cb(null, Date.now() + '-' + file.originalname);
   }
+
+  // destination: (
+  //   req: Request, 
+  //   file: Express.Multer.File, 
+  //   cb: (error: Error | null, destination: string) => void) => {
+  //   const uploadDir = 'uploads/tasks';
+  //   if (!fs.existsSync(uploadDir)) {
+  //     fs.mkdirSync(uploadDir, { recursive: true });
+  //   }
+  //   cb(null, uploadDir);
+  // },
+  // filename: (req, file, cb) => {
+  //   const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+  //   cb(null, `task-${uniqueSuffix}${path.extname(file.originalname)}`);
+  // }
 });
 
 const upload = multer({
