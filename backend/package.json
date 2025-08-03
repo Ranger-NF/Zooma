@@ -7,7 +7,7 @@
     "dev": "nodemon src/server.ts",
     "build": "tsc",
     "start": "node dist/server.js",
-    "postbuild": "node -e \"require('fs').cpSync('uploads', 'dist/uploads', {recursive: true, force: true}).catch(() => {})\""
+    "postbuild": "node -e \"try { require('fs').cpSync('uploads', 'dist/uploads', { recursive: true, force: true }); } catch (e) {}\""
   },
   "engines": {
     "node": "22.x"
