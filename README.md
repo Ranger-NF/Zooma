@@ -11,9 +11,9 @@ A modern, real-time multiplayer Bingo game where players complete photo-based ta
 ## 📱 Screenshots
 
 <div align="center">
-  <img src="screenshots/home.png" width="200" alt="Home Screen"/>
-  <img src="screenshots/tasks.png" width="200" alt="Tasks Screen"/>
-  <img src="screenshots/leaderboard.png" width="200" alt="Leaderboard"/>
+  <img src="docs/screenshots/HomePage.png" width="200" alt="Home Screen"/>
+  <img src="docs/screenshots/Create Room.png" width="200" alt="Tasks Screen"/>
+  <img src="docs/screenshots/Join Room.png" width="200" alt="Leaderboard"/>
   <img src="screenshots/mentor.png" width="200" alt="Mentor Dashboard"/>
 </div>
 
