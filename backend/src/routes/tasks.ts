@@ -9,7 +9,10 @@ const router = express.Router();
 
 // Configure multer for file uploads
 const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
+  destination: (
+    req: Request, 
+    file: Express.Multer.File, 
+    cb: (error: Error | null, destination: string) => void) => {
     const uploadDir = 'uploads/tasks';
     if (!fs.existsSync(uploadDir)) {
       fs.mkdirSync(uploadDir, { recursive: true });
@@ -27,14 +30,19 @@ const upload = multer({
   limits: {
     fileSize: 10 * 1024 * 1024 // 10MB limit
   },
-  fileFilter: (req, file, cb) => {
+  fileFilter: (
+  req: Request,
+  file: Express.Multer.File,
+  cb: multer.FileFilterCallback
+  ) => {
     if (file.mimetype.startsWith('image/')) {
       cb(null, true);
     } else {
       cb(new Error('Only image files are allowed'));
     }
   }
-});
+})
+
 
 // Submit task with photo
 router.post('/:taskId/submit', upload.single('photo'), async (req: Request, res: Response) => {
