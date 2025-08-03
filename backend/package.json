@@ -10,7 +10,7 @@
     "postbuild": "node -e \"require('fs').cpSync('uploads', 'dist/uploads', {recursive: true, force: true}).catch(() => {})\""
   },
   "engines": {
-    "node": "18.x"
+    "node": "22.x"
   },
   "dependencies": {
     "cors": "^2.8.5",
