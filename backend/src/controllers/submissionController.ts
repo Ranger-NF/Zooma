@@ -129,13 +129,14 @@ export class SubmissionController {
 
     // Enhance submissions with task details
     const submissionsWithDetails: SubmissionWithDetails[] = submissions.map(submission => {
-      const task = room.tasks.find(t => t.id === submission.taskId);
-      return {
-        ...submission.toObject(),
-        taskDetails: task,
-        playerName: (submission.playerId as any).name
-      };
+        const task = room.tasks.find(t => t.id === submission.taskId);
+        return {
+            ...submission.toObject(),
+            taskDetails: task,
+            playerName: (submission.playerId as any).name
+        } as SubmissionWithDetails;
     });
+
 
     const totalPages = Math.ceil(totalCount / limitNum);
 

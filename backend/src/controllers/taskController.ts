@@ -47,7 +47,7 @@ export class TaskController {
     const tasksWithStatus: TaskWithStatus[] = room.tasks.map(task => {
       const submission = submissionMap.get(task.id);
       return {
-        ...task.toObject(),
+        ...task,
         completed: submission?.status === 'approved',
         submissionStatus: submission?.status || null
       };
@@ -158,7 +158,7 @@ export class TaskController {
         });
 
         return {
-          ...task.toObject(),
+          ...task,
           stats: {
             totalSubmissions,
             approvedSubmissions,

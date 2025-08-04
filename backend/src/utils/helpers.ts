@@ -46,8 +46,11 @@ export const isValidRoomCode = (roomCode: string): boolean => {
  * Validate player name
  */
 export const isValidPlayerName = (name: string): boolean => {
-  return name && name.trim().length >= 2 && name.trim().length <= 50;
+  return (
+    !!name && name.trim().length >= 2 && name.trim().length <= 50
+  );
 };
+
 
 /**
  * Sanitize string input
