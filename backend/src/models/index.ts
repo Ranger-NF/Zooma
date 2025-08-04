@@ -1,5 +1,5 @@
 import mongoose, { Schema } from 'mongoose';
-import { IRoom, IPlayer, ISubmission } from '@/types';
+import { IRoom, IPlayer, ISubmission } from '../types';
 
 // Room Schema
 const roomSchema = new Schema<IRoom>({

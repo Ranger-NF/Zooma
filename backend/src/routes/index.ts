@@ -1,10 +1,10 @@
 import { Router } from 'express';
-import { upload, handleUploadError } from '@/middleware/upload';
-import { asyncHandler } from '@/middleware/errorHandler';
-import { RoomController } from '@/controllers/roomController';
-import { TaskController } from '@/controllers/taskController';
-import { SubmissionController } from '@/controllers/submissionController';
-import { AnalyticsController } from '@/controllers/analyticsController';
+import { upload, handleUploadError } from '../middleware/upload';
+import { asyncHandler } from '../middleware/errorHandler';
+import { RoomController } from '../controllers/roomController';
+import { TaskController } from '../controllers/taskController';
+import { SubmissionController } from '../controllers/submissionController';
+import { AnalyticsController } from '../controllers/analyticsController';
 
 const router = Router();
 

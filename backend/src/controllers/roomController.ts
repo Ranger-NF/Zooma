@@ -1,12 +1,12 @@
 import { Request, Response } from 'express';
-import { Room, Player } from '@/models';
+import { Room, Player } from '../models';
 import { 
   CreateRoomRequest, 
   JoinRoomRequest, 
   AddTasksRequest,
   ApiResponse,
   ITask 
-} from '@/types';
+} from '../types';
 import { 
   generateRoomCode, 
   generateTaskId, 
@@ -15,9 +15,9 @@ import {
   sanitizeString,
   validateTaskData,
   createApiResponse 
-} from '@/utils/helpers';
-import { CustomError } from '@/middleware/errorHandler';
-import { SocketManager } from '@/socket/socketManager';
+} from '../utils/helpers';
+import { CustomError } from '../middleware/errorHandler';
+import { SocketManager } from '../socket/socketManager';
 
 export class RoomController {
   private socketManager: SocketManager;
@@ -261,7 +261,7 @@ export class RoomController {
     await room.save();
 
     // Also remove related submissions
-    const { Submission } = require('@/models');
+    const { Submission } = require('../models');
     await Submission.deleteMany({ roomCode, taskId });
 
     // Emit socket event
@@ -287,7 +287,7 @@ export class RoomController {
       ? new Date(lastCheck as string) 
       : new Date(Date.now() - 60000); // Last minute if no timestamp
 
-    const { Submission } = require('@/models');
+    const { Submission } = require('../models');
     
     const recentSubmissions = await Submission.find({
       roomCode,

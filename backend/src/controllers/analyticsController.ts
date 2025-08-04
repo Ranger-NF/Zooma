@@ -1,16 +1,16 @@
 import { Request, Response } from 'express';
-import { Room, Player, Submission } from '@/models';
+import { Room, Player, Submission } from '../models';
 import { 
   ApiResponse, 
   LeaderboardEntry, 
   PlayerStats, 
   RoomAnalytics 
-} from '@/types';
+} from '../types';
 import { 
   isValidRoomCode, 
   createApiResponse 
-} from '@/utils/helpers';
-import { CustomError } from '@/middleware/errorHandler';
+} from '../utils/helpers';
+import { CustomError } from '../middleware/errorHandler';
 
 export class AnalyticsController {
 

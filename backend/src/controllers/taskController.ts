@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
-import { Room, Player, Submission } from '@/models';
-import { ApiResponse, TaskWithStatus } from '@/types';
-import { isValidRoomCode, createApiResponse } from '@/utils/helpers';
-import { CustomError } from '@/middleware/errorHandler';
+import { Room, Player, Submission } from '../models';
+import { ApiResponse, TaskWithStatus } from '../types';
+import { isValidRoomCode, createApiResponse } from '../utils/helpers';
+import { CustomError } from '../middleware/errorHandler';
 
 export class TaskController {
 

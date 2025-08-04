@@ -2,8 +2,8 @@ import express from 'express';
 import cors from 'cors';
 import path from 'path';
 import dotenv from 'dotenv';
-import routes from '@/routes';
-import { errorHandler, notFoundHandler } from '@/middleware/errorHandler';
+import routes from './routes';
+import { errorHandler, notFoundHandler } from './middleware/errorHandler';
 
 // Load environment variables
 dotenv.config();
@@ -21,7 +21,7 @@ class App {
   private initializeMiddlewares(): void {
     // CORS configuration
     this.app.use(cors({
-      origin: process.env.FRONTEND_URL || '*',
+      origin: '*',
       credentials: true,
       methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
       allowedHeaders: ['Content-Type', 'Authorization', 'x-requested-with']

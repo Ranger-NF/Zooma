@@ -1,7 +1,7 @@
 import { createServer } from 'http';
 import App from './app';
-import { DatabaseConnection } from '@/database/connection';
-import { SocketManager } from '@/socket/socketManager';
+import { DatabaseConnection } from './database/connection';
+import { SocketManager } from './socket/socketManager';
 
 class Server {
   private app: App;

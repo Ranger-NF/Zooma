@@ -1,19 +1,19 @@
 import { Request, Response } from 'express';
 import path from 'path';
 import fs from 'fs';
-import { Room, Player, Submission } from '@/models';
+import { Room, Player, Submission } from '../models';
 import { 
   ApiResponse, 
   ReviewSubmissionRequest, 
   SubmissionWithDetails 
-} from '@/types';
+} from '../types';
 import { 
   isValidRoomCode, 
   createApiResponse, 
   fileExists 
-} from '@/utils/helpers';
-import { CustomError } from '@/middleware/errorHandler';
-import { SocketManager } from '@/socket/socketManager';
+} from '../utils/helpers';
+import { CustomError } from '../middleware/errorHandler';
+import { SocketManager } from '../socket/socketManager';
 
 export class SubmissionController {
   private socketManager: SocketManager;

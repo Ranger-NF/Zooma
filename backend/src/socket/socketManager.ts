@@ -8,7 +8,7 @@ import {
   IPlayer,
   ISubmission,
   LeaderboardEntry
-} from '@/types';
+} from '../types';
 
 export class SocketManager {
   private static instance: SocketManager;
