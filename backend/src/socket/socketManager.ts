@@ -148,4 +148,26 @@ export class SocketManager {
   }
 
   // Broadcast to all clients in a room
-  public broadcastToRoom
+  public broadcastToRoom(roomCode: string, event: keyof ServerToClientEvents, data: any): void {
+    if (!this.io) return;
+    
+    this.io.to(roomCode).emit(event as any, data);
+  }
+
+  // Broadcast to all mentor clients in a room
+  public broadcastToMentorRoom(roomCode: string, event: keyof ServerToClientEvents, data: any): void {
+    if (!this.io) return;
+    
+    this.io.to(`mentor-${roomCode}`).emit(event as any, data);
+  }
+
+  // Get socket server instance
+  public getIO(): SocketServer<ClientToServerEvents, ServerToClientEvents, InterServerEvents, SocketData> | null {
+    return this.io;
+  }
+
+  // Check if socket server is initialized
+  public isInitialized(): boolean {
+    return this.io !== null;
+  }
+}
