@@ -36,14 +36,14 @@ class App {
 
     // Request logging middleware (development only)
     if (process.env.NODE_ENV === 'development') {
-      this.app.use((req, res, next) => {
+      this.app.use((req: any, res: any, next) => {
         console.log(`${new Date().toISOString()} - ${req.method} ${req.path}`);
         next();
       });
     }
 
     // Security headers
-    this.app.use((req, res, next) => {
+    this.app.use((req: any, res: any, next) => {
       res.setHeader('X-Content-Type-Options', 'nosniff');
       res.setHeader('X-Frame-Options', 'DENY');
       res.setHeader('X-XSS-Protection', '1; mode=block');
