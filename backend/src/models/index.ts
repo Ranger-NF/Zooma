@@ -4,7 +4,7 @@ import { IRoom, IPlayer, ISubmission } from '../types';
 // Room Schema
 const roomSchema = new Schema<IRoom>({
   roomCode: { 
-    type: String, 
+    type: String,
     unique: true, 
     required: true,
     index: true 
