@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../controllers/room_controller.dart';
 import '../../../core/routes/app_routes.dart';
-import '../../../core/theme/app_theme.dart';
 
 class JoinRoomPage extends StatefulWidget {
   const JoinRoomPage({super.key});

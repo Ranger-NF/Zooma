@@ -1,41 +1,41 @@
 class Room {
   final String roomCode;
+  final String mentorName;
   final String roomName;
-  final int roomSize;
-  final String status;
-  final List<Player> players;
+  final bool isActive;
   final DateTime createdAt;
+  final int maxPlayers;
+  //final String status;
+  // final List<Player> players;
 
   Room({
     required this.roomCode,
+    required this.mentorName,
     required this.roomName,
-    required this.roomSize,
-    required this.status,
-    required this.players,
+    required this.isActive,
     required this.createdAt,
+    required this.maxPlayers
   });
 
   factory Room.fromJson(Map<String, dynamic> json) {
     return Room(
       roomCode: json['roomCode'] ?? '',
+      mentorName: json['mentorName'] ?? '',
       roomName: json['roomName'] ?? '',
-      roomSize: json['roomSize'] ?? 0,
-      status: json['status'] ?? '',
-      players: (json['players'] as List<dynamic>?)
-          ?.map((player) => Player.fromJson(player))
-          .toList() ?? [],
+      isActive: json['isActive'],
       createdAt: DateTime.parse(json['createdAt'] ?? DateTime.now().toIso8601String()),
+      maxPlayers: json['maxPlayers']
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
       'roomCode': roomCode,
+      'mentorName': mentorName,
       'roomName': roomName,
-      'roomSize': roomSize,
-      'status': status,
-      'players': players.map((player) => player.toJson()).toList(),
+      'isActive': isActive,
       'createdAt': createdAt.toIso8601String(),
+      'maxPlayers': maxPlayers
     };
   }
 }
@@ -43,22 +43,28 @@ class Room {
 class Player {
   final String id;
   final String name;
-  final String color;
-  final int score;
+  final String roomCode;
+  final DateTime joinedAt;
+  final int totalPoints;
+  final int completedTasks;
 
   Player({
     required this.id,
     required this.name,
-    required this.color,
-    required this.score,
+    required this.roomCode,
+    required this.joinedAt,
+    required this.totalPoints,
+    required this.completedTasks
   });
 
   factory Player.fromJson(Map<String, dynamic> json) {
     return Player(
       id: json['id'] ?? '',
       name: json['name'] ?? '',
-      color: json['color'] ?? '#000000',
-      score: json['score'] ?? 0,
+      roomCode: json['roomCode'] ?? '',
+      joinedAt: DateTime.parse(json['joinedAt'] ?? DateTime.now().toIso8601String()),
+      totalPoints: json['totalPoints'] ?? 0,
+      completedTasks: json['completedTasks'] ?? 0
     );
   }
 
@@ -66,8 +72,10 @@ class Player {
     return {
       'id': id,
       'name': name,
-      'color': color,
-      'score': score,
+      'roomCode': roomCode,
+      'joinedAt': joinedAt,
+      'totalPoints': totalPoints,
+      'completedTasks': completedTasks
     };
   }
 }
