@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 
 class DioClient {
   final Dio _dio;
-  static const String baseUrl = 'https://your-api-base-url.com';
+  static const String baseUrl = 'http://localhost:3000/api';
 
   DioClient(this._dio) {
     _dio.options = BaseOptions(
