@@ -26,7 +26,7 @@ export class SocketManager {
   public initialize(server: HttpServer): void {
     this.io = new SocketServer(server, {
       cors: {
-        origin: process.env.FRONTEND_URL || "*",
+        origin: "*",
         methods: ["GET", "POST"],
         credentials: true
       },
