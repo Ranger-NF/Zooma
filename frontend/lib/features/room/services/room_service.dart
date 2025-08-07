@@ -7,17 +7,20 @@ class RoomService {
   RoomService(this._dioClient);
 
   Future<Room> createRoom(String roomName, int roomSize) async {
-    final response = await _dioClient.post('/api/rooms/create', data: {
-      'roomName': roomName,
-      'roomSize': roomSize,
-    });
+    final response = await _dioClient.post(
+      '/api/rooms/create', 
+      data: {
+        'roomName': roomName,
+        'roomSize': roomSize,
+      }
+    );
     return Room.fromJson(response.data);
   }
 
   Future<Room> joinRoom(String roomCode, String playerName) async {
     final response = await _dioClient.post('/api/rooms/join', data: {
       'roomCode': roomCode,
-      'playerName': playerName,
+      //'roomName': roomName
     });
     return Room.fromJson(response.data);
   }
