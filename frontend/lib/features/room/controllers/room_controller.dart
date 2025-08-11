@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:frontend/features/introduction/controllers/username_controller.dart';
 import '../models/room_model.dart';
 import '../services/room_service.dart';
 
@@ -18,8 +19,11 @@ class RoomController extends ChangeNotifier {
   Future<void> createRoom(String roomName, int roomSize) async {
     _setLoading(true);
     try {
-      _currentRoom = await _roomService.createRoom(roomName, roomSize);
-      _error = null;
+      String? username = await UsernameController.getUsername();
+      if(username != null){
+        _currentRoom = await _roomService.createRoom(roomName, roomSize, username);
+        _error = null;
+      }
     } catch (e) {
       _error = e.toString();
     } finally {

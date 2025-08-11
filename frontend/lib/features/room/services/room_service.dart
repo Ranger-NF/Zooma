@@ -1,3 +1,5 @@
+import 'package:frontend/data/task.dart';
+
 import '../../../core/network/dio_client.dart';
 import '../models/room_model.dart';
 
@@ -6,12 +8,13 @@ class RoomService {
 
   RoomService(this._dioClient);
 
-  Future<Room> createRoom(String roomName, int roomSize) async {
+  Future<Room> createRoom(String roomName, int roomSize, String mentorName) async {
     final response = await _dioClient.post(
       '/api/rooms/create', 
       data: {
+        'mentorName': mentorName,
         'roomName': roomName,
-        'roomSize': roomSize,
+        'task': Task.getRandomTasks()
       }
     );
     return Room.fromJson(response.data);
