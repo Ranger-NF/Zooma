@@ -77,9 +77,7 @@ export const formatPoints = (points: number): string => {
   return points.toString();
 };
 
-/**
- * Check if file exists
- */
+// Check if file exists
 export const fileExists = (filePath: string): Promise<boolean> => {
   return new Promise((resolve) => {
     const fs = require('fs');
