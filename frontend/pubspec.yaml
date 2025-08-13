@@ -17,6 +17,7 @@ dependencies:
   cached_network_image: ^3.3.0
   flutter_staggered_animations: ^1.1.1
   intl: ^0.18.1
+  flutter_native_splash: ^2.4.6
 
 dev_dependencies:
   flutter_test:
@@ -29,3 +30,28 @@ flutter:
 
   uses-material-design: true
 
+  assets:
+    - assets/images/camera.png
+    - assets/images/star.png
+    - assets/images/star1.png
+    - assets/images/screen0.png
+    - assets/images/screen1.png
+    - assets/images/screen2.png
+    - assets/images/screen3.png
+    - assets/images/screen4.png
+    - assets/images/screen5.png
+
+  fonts:
+    - family: Font
+      fonts:
+        - asset: assets/fonts/Fat Chubby Sans DEMO.otf
+
+flutter_native_splash:
+  image: assets/images/screen0.png
+  color: "#5B00FF"
+  android_12:
+    image: assets/images/screen0.png
+    icon_background_color: "#5B00FF"
+  android: true
+  ios: true
+  web: true

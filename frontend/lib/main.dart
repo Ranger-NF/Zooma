@@ -27,7 +27,8 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => getIt<SubmissionController>()),
       ],
       child: MaterialApp(
-        title: 'Bingo Game',
+        
+        title: 'Zooma',
         theme: AppTheme.lightTheme,
         initialRoute: AppRoutes.home,
         onGenerateRoute: AppRoutes.generateRoute,
