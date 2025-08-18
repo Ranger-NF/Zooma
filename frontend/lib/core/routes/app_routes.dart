@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/features/introduction/views/username_page.dart';
+import 'package:frontend/features/introduction/views/introduxtion_page.dart';
 import 'package:frontend/features/splash/views/splash_screen.dart';
 import '../../features/room/views/join_room_page.dart';
 import '../../features/room/views/create_room_page.dart';

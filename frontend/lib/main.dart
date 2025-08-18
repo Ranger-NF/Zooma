@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/features/introduction/providers/introduction_provider.dart';
 import 'package:provider/provider.dart';
 import 'core/di/dependency_injection.dart';
 import 'core/routes/app_routes.dart';
@@ -25,6 +26,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => getIt<LeaderboardController>()),
         ChangeNotifierProvider(create: (_) => getIt<TaskController>()),
         ChangeNotifierProvider(create: (_) => getIt<SubmissionController>()),
+        ChangeNotifierProvider(create: (_) => BoxProvider())
       ],
       child: MaterialApp(
         

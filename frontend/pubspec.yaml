@@ -40,6 +40,11 @@ flutter:
     - assets/images/screen3.png
     - assets/images/screen4.png
     - assets/images/screen5.png
+    - assets/elements/element1.png
+    - assets/elements/element2.png
+    - assets/elements/element3.png
+    - assets/elements/element5.png
+    - assets/elements/element6.png
 
   fonts:
     - family: Font
