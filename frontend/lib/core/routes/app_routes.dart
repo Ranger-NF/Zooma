@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/features/introduction/views/username_page.dart';
 import 'package:frontend/features/splash/views/splash_screen.dart';
 import '../../features/room/views/join_room_page.dart';
 import '../../features/room/views/create_room_page.dart';
@@ -17,7 +18,7 @@ class AppRoutes {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case home:
-        return MaterialPageRoute(builder: (_) => SplashScreen()); // (_) => const HomePage()
+        return MaterialPageRoute(builder: (_) => BackgroundAnimationScreen()); // (_) => const HomePage()
       case joinRoom:
         return MaterialPageRoute(builder: (_) => const JoinRoomPage());
       case createRoom:
