@@ -29,7 +29,6 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => BoxProvider())
       ],
       child: MaterialApp(
-        
         title: 'Zooma',
         theme: AppTheme.lightTheme,
         initialRoute: AppRoutes.home,
