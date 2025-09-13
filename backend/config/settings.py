@@ -27,11 +27,11 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "rest_framework",
-    # "core",
-    "player",
-    "game",
-    "answer",
-    "question"
+    # "core.apps.CoreConfig",
+    "apps.player.apps.PlayerConfig",
+    # "apps.game.apps.GameConfig",
+    # "apps.answer.apps.AnswerConfig",
+    # "apps.question.apps.QuestionConfig"
 ]
 
 MIDDLEWARE = [
@@ -105,8 +105,16 @@ USE_I18N = True
 
 USE_TZ = True
 
+STATIC_URL = 'static/'
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+]
+STATIC_ROOT = BASE_DIR / "static_root"
+
+
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = BASE_DIR / 'media'
+
 
 
 # Default primary key field type
