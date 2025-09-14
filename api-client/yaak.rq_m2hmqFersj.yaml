@@ -1,8 +1,8 @@
 type: http_request
 model: http_request
-id: rq_RATXHMYgpS
-createdAt: 2025-09-13T15:26:59.834101074
-updatedAt: 2025-09-14T17:44:05.561001506
+id: rq_m2hmqFersj
+createdAt: 2025-09-14T17:44:21.600336573
+updatedAt: 2025-09-14T17:48:22.013544416
 workspaceId: wk_iYwvchmhb7
 folderId: fl_i9tjLGyhD7
 authentication: {}
@@ -10,7 +10,8 @@ authenticationType: null
 body:
   text: |-
     {
-      "username": "Muflih"
+        "mentor_id": "ce63d664-0c1c-45e8-b752-6f3bd6217252",
+        "max_players": 5
     }
 bodyType: application/json
 description: ''
@@ -18,9 +19,9 @@ headers:
 - enabled: true
   name: Content-Type
   value: application/json
-  id: g2fhWQUdAq
+  id: PjP8eVnw3A
 method: POST
 name: ''
-sortPriority: 1000.0
-url: http://127.0.0.1:8000/api/player/create/
+sortPriority: 999.9999
+url: http://127.0.0.1:8000/api/room/create/
 urlParameters: []
