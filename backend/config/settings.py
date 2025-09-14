@@ -29,7 +29,7 @@ INSTALLED_APPS = [
     "rest_framework",
     # "core.apps.CoreConfig",
     "apps.player.apps.PlayerConfig",
-    # "apps.game.apps.GameConfig",
+    "apps.room.apps.RoomConfig",
     # "apps.answer.apps.AnswerConfig",
     # "apps.question.apps.QuestionConfig"
 ]

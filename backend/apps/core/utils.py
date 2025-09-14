@@ -1,8 +1,8 @@
 import string
 import random
-from ..room.models import Room
 
 def generate_room_code():
+    from ..room.models import Room
     length = 6
     while True:
         code = ''.join(random.choices(string.ascii_uppercase+string.digits, k=length))
