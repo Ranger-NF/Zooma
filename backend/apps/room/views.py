@@ -15,3 +15,4 @@ class RoomCreateAPIView(generics.CreateAPIView):
         mentor = Player.objects.get(id=mentor_id)
         room = serializer.save(mentor=mentor)
         room.players.add(mentor)
+
