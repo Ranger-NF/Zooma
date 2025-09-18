@@ -45,3 +45,25 @@ class JoinRoomAPIView(views.APIView):
         serializer = RoomSerializer(room)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
+class GameControlAPIView(views.APIView):
+    def post(self, request, *args, **kwargs):
+        room_code = request.data.get('room_code')
+        mentor_id = request.data.get('mentor_id')
+        action = request.data.get('action') # start or end
+
+        if not all([room_code, mentor_id, action]):
+            return Response({'error': 'Room code, mentor ID, and action are required.'},status=status.HTTP_400_BAD_REQUEST)
+        try:
+            room = Room.objects.get(code__iexact=room_code, mentor_id=mentor_id)
+        except Room.DoesNotExist:
+            return Response({'error': 'Room not found or you are not the mentor.'}, status=status.HTTP_403_FORBIDDEN)
+
+        if action.lower() == 'start':
+            room.is_active = True
+            room.save()
+            return Response({'message': 'Game has started.'}, status=status.HTTP_200_OK)
+        elif action.lower() == 'end':
+            room.is_active = False
+            room.save()
+        else:
+            return Response({'error': "Invalid action. Use 'start' or 'end'."}, status=status.HTTP_400_BAD_REQUEST)
