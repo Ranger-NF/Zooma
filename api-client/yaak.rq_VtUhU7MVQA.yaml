@@ -1,0 +1,27 @@
+type: http_request
+model: http_request
+id: rq_VtUhU7MVQA
+createdAt: 2025-09-20T06:27:06.911844187
+updatedAt: 2025-09-20T06:49:17.933309738
+workspaceId: wk_iYwvchmhb7
+folderId: fl_D7tRoptu8H
+authentication: {}
+authenticationType: null
+body:
+  text: |-
+    {
+      "room_code": "V29ACP",
+      "player_id": "ce63d664-0c1c-45e8-b752-6f3bd6217252"
+    }
+bodyType: application/json
+description: ''
+headers:
+- enabled: true
+  name: Content-Type
+  value: application/json
+  id: r0uTKPtzcQ
+method: POST
+name: Koin Room
+sortPriority: 1000.0008
+url: http://127.0.0.1:8000/api/room/join/
+urlParameters: []

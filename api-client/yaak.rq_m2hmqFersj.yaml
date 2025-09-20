@@ -2,7 +2,7 @@ type: http_request
 model: http_request
 id: rq_m2hmqFersj
 createdAt: 2025-09-14T17:44:21.600336573
-updatedAt: 2025-09-14T17:48:22.013544416
+updatedAt: 2025-09-20T06:49:00.878813568
 workspaceId: wk_iYwvchmhb7
 folderId: fl_i9tjLGyhD7
 authentication: {}
@@ -10,8 +10,7 @@ authenticationType: null
 body:
   text: |-
     {
-        "mentor_id": "ce63d664-0c1c-45e8-b752-6f3bd6217252",
-        "max_players": 5
+      "username": "Muflih"
     }
 bodyType: application/json
 description: ''
@@ -21,7 +20,7 @@ headers:
   value: application/json
   id: PjP8eVnw3A
 method: POST
-name: ''
+name: Create a Player
 sortPriority: 999.9999
-url: http://127.0.0.1:8000/api/room/create/
+url: http://127.0.0.1:8000/api/player/create/
 urlParameters: []
