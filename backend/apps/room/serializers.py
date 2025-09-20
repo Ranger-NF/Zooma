@@ -15,6 +15,7 @@ class RoomSerializer(serializers.ModelSerializer):
             'mentor_id',
             'players',
             'max_players',
+            'num_questions',
             'is_active',
             'created_at'
         ]

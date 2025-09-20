@@ -1,12 +1,17 @@
-from django.core.serializers import serialize
+import shutil
+
+from apps.question.models import Question
 from rest_framework import generics, views, status
 from rest_framework.response import Response
-
+from apps.answer.models import Answer
 from .models import Room
 from .serializers import RoomSerializer
 from ..player.models import Player
 from rest_framework.request import Request
 from typing import cast
+import random
+import os
+from django.conf import settings
 
 class RoomCreateAPIView(generics.CreateAPIView):
     queryset = Room.objects.all()
@@ -15,9 +20,27 @@ class RoomCreateAPIView(generics.CreateAPIView):
     def perform_create(self, serializer):
         request = cast(Request, self.request)
         mentor_id = request.data.get("mentor_id")
+        num_questions = int(request.data.get('num_questions', 5))
         mentor = Player.objects.get(id=mentor_id)
         room = serializer.save(mentor=mentor)
         room.players.add(mentor)
+
+        all_questions = list(Question.objects.all())
+        if len(all_questions) < num_questions:
+            selected_questions = all_questions
+        else:
+            selected_questions = random.sample(all_questions, num_questions)
+
+        room.questions.set(selected_questions)
+
+class RoomQuestionListAPIView(views.APIView):
+    def get(self, request, room_code, *args, **kwargs):
+        try:
+            room = Room.objects.get(code__iexact=room_code)
+            questions = room.questions.all().values('id', 'text')
+            return Response(list(questions))
+        except Room.DoesNotExist:
+            return Response({'error': 'Room not found.'}, status=status.HTTP_404_NOT_FOUND)
 
 
 class JoinRoomAPIView(views.APIView):
@@ -65,5 +88,17 @@ class GameControlAPIView(views.APIView):
         elif action.lower() == 'end':
             room.is_active = False
             room.save()
+            answers = Answer.objects.filter(room=room)
+            for answer in answers:
+                if answer.image:
+                    if os.path.isfile(answer.image.path):
+                        os.remove(answer.image.path)
+            answers.delete()
+            room_upload_folder = os.path.join(settings.MEDIA_ROOT, 'answers', room.code)
+            if os.path.exists(room_upload_folder) and not os.listdir(str(room_upload_folder)):
+                shutil.rmtree(room_upload_folder)
+
+            return Response({'message': 'Game has ended and answers have been cleared.'}, status=status.HTTP_200_OK)
+
         else:
             return Response({'error': "Invalid action. Use 'start' or 'end'."}, status=status.HTTP_400_BAD_REQUEST)
