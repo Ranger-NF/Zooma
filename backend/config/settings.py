@@ -30,8 +30,8 @@ INSTALLED_APPS = [
     # "core.apps.CoreConfig",
     "apps.player.apps.PlayerConfig",
     "apps.room.apps.RoomConfig",
-    # "apps.answer.apps.AnswerConfig",
-    # "apps.question.apps.QuestionConfig"
+    "apps.answer.apps.AnswerConfig",
+    "apps.question.apps.QuestionConfig"
 ]
 
 MIDDLEWARE = [

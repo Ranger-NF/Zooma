@@ -17,4 +17,4 @@ class LeaderboardSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Player
-        fields = ['id', 'username', 'total_score']
+        fields = ['id', 'username', 'validated_answers_count']

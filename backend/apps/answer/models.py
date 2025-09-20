@@ -15,8 +15,8 @@ class Answer(models.Model):
     score = models.IntegerField(default=0)
     submitted_at = models.DateTimeField(auto_now_add=True)
 
-    # class Meta:
-    #     unique_together = ('player', 'question', 'room')
+    class Meta:
+        unique_together = ('player', 'question', 'room')
 
     def __str__(self):
         return f"{self.player.username}'s answer to Q{self.question.id} in Room {self.room.code}"
