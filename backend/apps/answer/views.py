@@ -77,9 +77,7 @@ class LeaderboardAPIView(views.APIView):
         except Room.DoesNotExist:
             return Response({'error': 'Room not found.'}, status=status.HTTP_404_NOT_FOUND)
 
-        players_with_scores = Player.objects.filter(
-            game_rooms=room
-        ).annotate(
+        players_with_scores = room.players.annotate(
             validated_answers_count=Count(
                 'answer',
                 filter=Q(answer__room=room) & Q(answer__score__gt=0)
@@ -88,4 +86,3 @@ class LeaderboardAPIView(views.APIView):
 
         serializer = LeaderboardSerializer(players_with_scores, many=True)
         return Response(serializer.data)
-    

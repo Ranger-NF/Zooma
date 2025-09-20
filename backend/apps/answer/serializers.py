@@ -13,7 +13,7 @@ class AnswerSerializer(serializers.ModelSerializer):
 
 
 class LeaderboardSerializer(serializers.ModelSerializer):
-    total_score = serializers.IntegerField()
+    validated_answers_count = serializers.IntegerField()
 
     class Meta:
         model = Player
