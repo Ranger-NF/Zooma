@@ -1,4 +1,4 @@
-import '../../../core/network/dio_client.dart';
+import '../../../core/network/api_service.dart';
 import '../models/submission_model.dart';
 
 class SubmissionService {
