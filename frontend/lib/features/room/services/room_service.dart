@@ -1,4 +1,3 @@
-import 'package:frontend/data/task.dart';
 
 import '../../../core/network/dio_client.dart';
 import '../models/room_model.dart';
@@ -14,7 +13,6 @@ class RoomService {
       data: {
         'mentorName': mentorName,
         'roomName': roomName,
-        'task': Task.getRandomTasks()
       }
     );
     return Room.fromJson(response.data);

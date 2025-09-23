@@ -1,8 +1,7 @@
-import 'package:flutter/material.dart';
-//import 'package:provider/provider.dart';
-import 'package:frontend/features/introduction/models/introduxtion_model.dart';
+import 'dart:async'; 
 import 'dart:math';
-
+import 'package:flutter/material.dart';
+import 'package:frontend/features/introduction/models/introduction_model.dart';
 
 class BoxProvider with ChangeNotifier {
   final double _gravity = 0.5;
@@ -10,9 +9,22 @@ class BoxProvider with ChangeNotifier {
   final double _boxSize = 120.0;
   final Random _random = Random();
 
+ 
   List<Box> _boxes = [];
   List<Box> get boxes => _boxes;
 
+  Timer? _timer;
+
+  BoxProvider() {
+    addBoxesPeriodically();
+  }
+
+  
+  @override
+  void dispose() {
+    _timer?.cancel();
+    super.dispose();
+  }
 
   void addBox() {
     if (_boxes.length < 10) {
@@ -27,14 +39,20 @@ class BoxProvider with ChangeNotifier {
   }
 
   void addBoxesPeriodically() {
-    final int boxesToAdd = _random.nextInt(3) + 1;
-    for (int i = 0; i < boxesToAdd; i++) {
-      addBox();
-    }
-    Future.delayed(Duration(milliseconds: _random.nextInt(1000) + 500), () {
-      addBoxesPeriodically();
+    
+    _timer?.cancel();
+    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      if (_boxes.length >= 10) {
+        timer.cancel();
+        return;
+      }
+      final int boxesToAdd = _random.nextInt(3) + 1;
+      for (int i = 0; i < boxesToAdd; i++) {
+        addBox();
+      }
     });
   }
+
 
   void updateBoxPositions(Size screenSize) {
     for (int i = 0; i < _boxes.length; i++) {
@@ -44,9 +62,7 @@ class BoxProvider with ChangeNotifier {
         box.velocityY += _gravity;
         box.y += box.velocityY;
         box.rotation += box.rotationSpeed;
-
         double groundLevel;
-
         if (i < 5) {
           groundLevel = screenSize.height - _boxSize;
         } else {
@@ -65,5 +81,4 @@ class BoxProvider with ChangeNotifier {
     }
     notifyListeners();
   }
-
 }

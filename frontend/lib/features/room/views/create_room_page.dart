@@ -26,7 +26,9 @@ class _CreateRoomPageState extends State<CreateRoomPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Create Room'),
+        title: const Text(
+          'Create Room',
+        ),
         centerTitle: true,
       ),
       body: Padding(
@@ -122,7 +124,7 @@ class _CreateRoomPageState extends State<CreateRoomPage> {
             '$size',
             style: TextStyle(
               fontSize: 20,
-              fontWeight: FontWeight.bold,
+              fontWeight: FontWeight.w100,
               color: isSelected ? Colors.white : Colors.grey.shade600,
             ),
           ),
