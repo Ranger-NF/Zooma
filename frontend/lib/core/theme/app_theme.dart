@@ -10,7 +10,7 @@ class AppTheme {
   static const Color textPrimary = Colors.white;
 
   static ThemeData lightTheme = ThemeData(
-    fontFamily: "Font",
+    fontFamily: "Zatiyan",
     scaffoldBackgroundColor: backgroundColor,
     cardColor: surfaceColor,
     appBarTheme: const AppBarTheme(
