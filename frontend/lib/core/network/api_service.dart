@@ -1,58 +1,44 @@
 import 'package:dio/dio.dart';
+import 'package:frontend/core/util/token_storage.dart';
 
-class DioClient {
-  final Dio _dio;
-  static const String baseUrl = 'http://localhost:5000/api';
+class ApiService {
+  static final Dio _dio = Dio(
+    BaseOptions(
+      baseUrl: "http://localhost:3000",
+      connectTimeout: Duration(minutes: 2),
+      receiveTimeout: Duration(minutes: 2),
+    )
+  )..interceptors.add(InterceptorsWrapper(
+    onRequest: (options, handle) async{
+      final token = await TokenStorage.getToken();
+      if(token != null){
+        options.headers["Authorization"] = "Bearer $token";
+      }
+      return handle.next(options);
+    },
+    onError: (e, handler){
+      if(e.response?.statusCode == 401){
+        // UnAuthorized Request Handler
+      }
 
-  DioClient(this._dio) {
-    _dio.options = BaseOptions(
-      baseUrl: baseUrl,
-      connectTimeout: const Duration(seconds: 30),
-      receiveTimeout: const Duration(seconds: 30),
-      sendTimeout: const Duration(seconds: 30),
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-      },
-    );
+      return handler.next(e);
+    }
+  ));
 
-    _dio.interceptors.add(LogInterceptor(
-      request: true,
-      requestBody: true,
-      responseBody: true,
-      error: true,
-    ));
+
+  static Future<Response> get(String endpoint) async {
+    return await _dio.get(endpoint);
   }
 
-  Future<Response> get(String path, {Map<String, dynamic>? queryParameters}) async {
-    try {
-      return await _dio.get(path, queryParameters: queryParameters);
-    } catch (e) {
-      rethrow;
-    }
+  static Future<Response> post(String endpoint, {required Map<String, dynamic> data}) async {
+    return await _dio.post(endpoint, data: data);
   }
 
-  Future<Response> post(String path, {dynamic data}) async {
-    try {
-      return await _dio.post(path, data: data);
-    } catch (e) {
-      rethrow;
-    }
+  static Future<Response> patch(String endpoint, {required Map<String, dynamic> data}) async {
+    return await _dio.patch(endpoint, data: data);
   }
 
-  Future<Response> put(String path, {dynamic data}) async {
-    try {
-      return await _dio.put(path, data: data);
-    } catch (e) {
-      rethrow;
-    }
-  }
-
-  Future<Response> delete(String path) async {
-    try {
-      return await _dio.delete(path);
-    } catch (e) {
-      rethrow;
-    }
+  static Future<Response> delete(String endpoint) async {
+    return await _dio.delete(endpoint);
   }
 }
