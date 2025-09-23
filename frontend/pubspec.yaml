@@ -50,6 +50,10 @@ flutter:
     - family: Font
       fonts:
         - asset: assets/fonts/Fat Chubby Sans DEMO.otf
+          weight: 400
+    - family: Zatiyan
+      fonts:
+        - asset: assets/fonts/Zatiyan.ttf 
 
 flutter_native_splash:
   image: assets/images/screen0.png
