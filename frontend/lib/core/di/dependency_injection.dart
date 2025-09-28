@@ -1,7 +1,7 @@
 import 'package:get_it/get_it.dart';
 import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../network/dio_client.dart';
+import '../network/api_service.dart';
 import '../../features/room/services/room_service.dart';
 import '../../features/room/controllers/room_controller.dart';
 import '../../features/leaderboard/services/leaderboard_service.dart';
@@ -21,13 +21,13 @@ class DependencyInjection {
 
     // Network
     getIt.registerSingleton<Dio>(Dio());
-    getIt.registerSingleton<DioClient>(DioClient(getIt<Dio>()));
+    getIt.registerSingleton<ApiService>(ApiService());
 
     // Services
-    getIt.registerSingleton<RoomService>(RoomService(getIt<DioClient>()));
-    getIt.registerSingleton<LeaderboardService>(LeaderboardService(getIt<DioClient>()));
-    getIt.registerSingleton<TaskService>(TaskService(getIt<DioClient>()));
-    getIt.registerSingleton<SubmissionService>(SubmissionService(getIt<DioClient>()));
+    getIt.registerSingleton<RoomService>(RoomService(getIt<ApiService>()));
+    getIt.registerSingleton<LeaderboardService>(LeaderboardService(getIt<ApiService>()));
+    getIt.registerSingleton<TaskService>(TaskService(getIt<ApiService>()));
+    getIt.registerSingleton<SubmissionService>(SubmissionService(getIt<ApiService>()));
 
     // Controllers
     getIt.registerFactory<RoomController>(() => RoomController(getIt<RoomService>()));
