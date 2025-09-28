@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:frontend/core/util/token_storage.dart';
 
 class ApiService {
+  
   static final Dio _dio = Dio(
     BaseOptions(
       baseUrl: "http://localhost:3000",
