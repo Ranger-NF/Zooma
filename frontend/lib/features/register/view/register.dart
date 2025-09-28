@@ -1,18 +1,71 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/core/theme/app_theme.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:frontend/features/register/view/register_widget.dart';
 
 class RegisterScreen extends StatefulWidget{
   @override
   State<RegisterScreen> createState() => _StateRegisterPage();
 }
 
-class _StateRegisterPage extends State<RegisterScreen>{
+class _StateRegisterPage extends State<RegisterScreen> with SingleTickerProviderStateMixin{
 
+  late AnimationController _animationController;
   final TextEditingController _controller = TextEditingController();
+
+
+  final List<Map<String, dynamic>> _stickerData = [
+    {
+      'path': 'assets/elements/register/Sticker1.svg',
+      'size': 30.0,
+      'top': 50.0,
+      'left': 30.0
+    },
+    {
+      'path': 'assets/elements/register/Sticker2.svg',
+      'size': 370.0,
+      'top': 20.0,
+      'right': 0.0
+    },
+    {
+      'path': 'assets/elements/register/Sticker3.svg',
+      'size': 340.0,
+      'bottom': 10.0,
+      'left': 0.0
+    },
+    {
+      'path': 'assets/elements/register/Sticker4.svg',
+      'size': 370.0,
+      'bottom': 180.0,
+      'right': 0.0
+    },
+    {
+      'path': 'assets/elements/register/Sticker5.svg',
+      'size': 75.0,
+      'bottom': 30.0,
+      'left': 0.0
+    },
+    {
+      'path': 'assets/elements/register/Sticker6.svg',
+      'size': 75.0,
+      'top': 150.0,
+      'right':0.0,
+    },
+  ];
+
+  @override
+  void initState() {
+    super.initState();
+    _animationController = AnimationController(
+      duration: Duration(milliseconds: 2000),
+      vsync: this
+    );
+    _animationController.forward();
+  }
 
   @override 
   void dispose() {
     super.dispose();
+    _animationController.dispose();
     _controller.dispose();
   }
 
@@ -21,66 +74,39 @@ class _StateRegisterPage extends State<RegisterScreen>{
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xFFFDD259),
-      body: LayoutBuilder(
-        builder: (BuildContext ctx, BoxConstraints view){
-          return SingleChildScrollView(
-            child: ConstrainedBox(
-              constraints: BoxConstraints(
-                minHeight: view.maxHeight
+      body: Stack(
+        children: [
+          ..._stickerData.asMap().entries.map((entry){
+            int index = entry.key;
+            Map<String, dynamic> data = entry.value;
+
+            final interval = Interval(
+              (index*0.1),
+              (index*0.1)+0.5,
+              curve: Curves.elasticOut
+            );
+
+            final animation = CurvedAnimation(parent: _animationController, curve: interval);
+
+            return Positioned(
+              top: data["top"],
+              left: data["left"],
+              right: data['right'],
+              bottom: data['bottom'],
+              child: ScaleTransition(
+                scale: animation,
+                child: SvgPicture.asset(
+                  data['path'],
+                  width: data['size'],
+                ),
               ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    "Enter Your Name",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 35
-                    ),
-                  ),
-                  Text(
-                    "To Start the Game..",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 35
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Card(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30)
-                      ),
-                      elevation: 50,
-                      child: TextFormField(
-                        controller: _controller,
-                        style: TextStyle(
-                          color: AppTheme.backgroundColor,
-                          fontSize: 25
-                        ),
-                        cursorColor: AppTheme.backgroundColor,
-                        cursorWidth: 3,
-                        cursorHeight: 35,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                            borderSide: BorderSide.none,
-                            borderRadius: BorderRadius.circular(35),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide.none,
-                            borderRadius: BorderRadius.circular(36),
-                          ),
-                          filled: true,
-                          fillColor: Colors.white,
-                        ),
-                      ),
-                    )
-                  )
-                ],
-              ),
-            ),
-          );
-        } 
+            );
+
+          }),
+
+          RegisterWidget.registerWidget(controller: _controller)
+
+        ],
       ),
     );
   }
