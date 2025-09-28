@@ -51,26 +51,26 @@ class TaskController extends ChangeNotifier {
     }
   }
 
-  Future<void> updateTask(String roomCode, String taskId, Map<String, dynamic> updates) async {
-    try {
-      await _taskService.updateTask(roomCode, taskId, updates);
-      await loadAllRoomTasks(roomCode);
-    } catch (e) {
-      _error = e.toString();
-      notifyListeners();
-    }
-  }
+  // Future<void> updateTask(String roomCode, String taskId, Map<String, dynamic> updates) async {
+  //   try {
+  //     await _taskService.updateTask(roomCode, taskId, updates);
+  //     await loadAllRoomTasks(roomCode);
+  //   } catch (e) {
+  //     _error = e.toString();
+  //     notifyListeners();
+  //   }
+  // }
 
-  Future<void> deleteTask(String roomCode, String taskId) async {
-    try {
-      await _taskService.deleteTask(roomCode, taskId);
-      _tasks.removeWhere((task) => task.id == taskId);
-      notifyListeners();
-    } catch (e) {
-      _error = e.toString();
-      notifyListeners();
-    }
-  }
+  // Future<void> deleteTask(String roomCode, String taskId) async {
+  //   try {
+  //     await _taskService.deleteTask(roomCode, taskId);
+  //     _tasks.removeWhere((task) => task.id == taskId);
+  //     notifyListeners();
+  //   } catch (e) {
+  //     _error = e.toString();
+  //     notifyListeners();
+  //   }
+  // }
 
   void _setLoading(bool loading) {
     _isLoading = loading;
