@@ -39,29 +39,29 @@ class SubmissionController extends ChangeNotifier {
     }
   }
 
-  Future<void> reviewSubmission(String submissionId, String status, String? feedback) async {
-    try {
-      await _submissionService.reviewSubmission(submissionId, status, feedback);
-      // Update the local submission
-      final index = _submissions.indexWhere((s) => s.id == submissionId);
-      if (index != -1) {
-        _submissions[index] = Submission(
-          id: _submissions[index].id,
-          roomCode: _submissions[index].roomCode,
-          playerId: _submissions[index].playerId,
-          taskId: _submissions[index].taskId,
-          photoUrl: _submissions[index].photoUrl,
-          status: status,
-          submittedAt: _submissions[index].submittedAt,
-          feedback: feedback,
-        );
-      }
-      notifyListeners();
-    } catch (e) {
-      _error = e.toString();
-      notifyListeners();
-    }
-  }
+  // Future<void> reviewSubmission(String submissionId, String status, String? feedback) async {
+  //   try {
+  //     await _submissionService.reviewSubmission(submissionId, status, feedback);
+  //     // Update the local submission
+  //     final index = _submissions.indexWhere((s) => s.id == submissionId);
+  //     if (index != -1) {
+  //       _submissions[index] = Submission(
+  //         id: _submissions[index].id,
+  //         roomCode: _submissions[index].roomCode,
+  //         playerId: _submissions[index].playerId,
+  //         taskId: _submissions[index].taskId,
+  //         photoUrl: _submissions[index].photoUrl,
+  //         status: status,
+  //         submittedAt: _submissions[index].submittedAt,
+  //         feedback: feedback,
+  //       );
+  //     }
+  //     notifyListeners();
+  //   } catch (e) {
+  //     _error = e.toString();
+  //     notifyListeners();
+  //   }
+  // }
 
   Future<void> loadPlayerSubmissions(String playerId) async {
     _setLoading(true);
