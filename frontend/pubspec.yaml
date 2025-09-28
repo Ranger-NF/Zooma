@@ -43,6 +43,7 @@ flutter:
     - assets/elements/element3.png
     - assets/elements/element5.png
     - assets/elements/element6.png
+    - assets/elements/register/
 
   fonts:
     - family: Font
