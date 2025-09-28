@@ -26,11 +26,11 @@ class ApiService {
   ));
 
 
-  static Future<Response> get(String endpoint) async {
+  Future<Response> get(String endpoint) async {
     return await _dio.get(endpoint);
   }
 
-  static Future<Response> post(String endpoint, {required Map<String, dynamic> data}) async {
+  Future<Response> post(String endpoint, {required Map<String, dynamic> data}) async {
     return await _dio.post(endpoint, data: data);
   }
 
