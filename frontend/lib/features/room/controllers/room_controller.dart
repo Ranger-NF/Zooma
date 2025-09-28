@@ -55,17 +55,17 @@ class RoomController extends ChangeNotifier {
     }
   }
 
-  Future<void> updateRoomStatus(String roomCode, String status) async {
-    try {
-      await _roomService.updateRoomStatus(roomCode, status);
-      if (_currentRoom != null) {
-        await getRoomDetails(roomCode);
-      }
-    } catch (e) {
-      _error = e.toString();
-      notifyListeners();
-    }
-  }
+  // Future<void> updateRoomStatus(String roomCode, String status) async {
+  //   try {
+  //     await _roomService.updateRoomStatus(roomCode, status);
+  //     if (_currentRoom != null) {
+  //       await getRoomDetails(roomCode);
+  //     }
+  //   } catch (e) {
+  //     _error = e.toString();
+  //     notifyListeners();
+  //   }
+  // }
 
   void _setLoading(bool loading) {
     _isLoading = loading;
