@@ -21,11 +21,11 @@ class AppRoutes {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case home:
-        return MaterialPageRoute(builder: (_) => HomeScreen());
+        return MaterialPageRoute(builder: (_) => CreateRoomScreen());
       case joinRoom:
         return MaterialPageRoute(builder: (_) => const JoinRoomPage());
       case createRoom:
-        return MaterialPageRoute(builder: (_) => const CreateRoomPage());
+        return MaterialPageRoute(builder: (_) => CreateRoomScreen());
       case leaderboard:
         final args = settings.arguments as Map<String, dynamic>?;
         return MaterialPageRoute(
