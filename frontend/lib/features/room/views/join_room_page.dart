@@ -1,142 +1,144 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import '../controllers/room_controller.dart';
-import '../../../core/routes/app_routes.dart';
+import 'package:frontend/core/theme/app_theme.dart';
+import 'package:frontend/features/home/views/home_widget.dart';
 
-class JoinRoomPage extends StatefulWidget {
-  const JoinRoomPage({super.key});
-
+class JoinRoomScreen extends StatefulWidget{
   @override
-  State<JoinRoomPage> createState() => _JoinRoomPageState();
+  State<JoinRoomScreen> createState() => _StateJoinRoomScreen();
 }
 
-class _JoinRoomPageState extends State<JoinRoomPage> {
-  final _formKey = GlobalKey<FormState>();
-  final _roomCodeController = TextEditingController();
-  final _playerNameController = TextEditingController();
+class _StateJoinRoomScreen extends State<JoinRoomScreen>{
+
+  final TextEditingController _controller = TextEditingController();
+
 
   @override
-  void dispose() {
-    _roomCodeController.dispose();
-    _playerNameController.dispose();
+  void dispose(){
     super.dispose();
+    _controller.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Join Team'),
         centerTitle: true,
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(24),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              const SizedBox(height: 40),
-              const Text(
-                'Enter the Team Code',
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.w600,
-                ),
-                textAlign: TextAlign.center,
-              ),
-              const SizedBox(height: 32),
-              TextFormField(
-                controller: _roomCodeController,
-                decoration: const InputDecoration(
-                  hintText: '203045',
-                  contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-                ),
-                textAlign: TextAlign.center,
-                style: const TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                  letterSpacing: 2,
-                ),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter room code';
-                  }
-                  return null;
-                },
-              ),
-              const SizedBox(height: 24),
-              TextFormField(
-                controller: _playerNameController,
-                decoration: const InputDecoration(
-                  labelText: 'Your Name',
-                  hintText: 'Enter your name',
-                ),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter your name';
-                  }
-                  return null;
-                },
-              ),
-              const SizedBox(height: 40),
-              Consumer<RoomController>(
-                builder: (context, controller, child) {
-                  return ElevatedButton(
-                    onPressed: controller.isLoading ? null : _joinRoom,
-                    child: controller.isLoading
-                        ? const CircularProgressIndicator(color: Colors.white)
-                        : const Text('Join Room'),
-                  );
-                },
-              ),
-              const SizedBox(height: 16),
-              Consumer<RoomController>(
-                builder: (context, controller, child) {
-                  if (controller.error != null) {
-                    return Container(
-                      padding: const EdgeInsets.all(12),
-                      decoration: BoxDecoration(
-                        color: Colors.red.shade50,
-                        borderRadius: BorderRadius.circular(8),
-                        border: Border.all(color: Colors.red.shade200),
-                      ),
-                      child: Text(
-                        controller.error!,
-                        style: const TextStyle(color: Colors.red),
-                        textAlign: TextAlign.center,
-                      ),
-                    );
-                  }
-                  return const SizedBox.shrink();
-                },
-              ),
-            ],
+        title: Text(
+          "Join Room",
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 25
           ),
         ),
+        leadingWidth: 80,
+        leading: Padding(
+          padding: EdgeInsets.only(left: 30,bottom: 5),
+          child: IconButton(
+            style: IconButton.styleFrom(
+              elevation: 20,
+              foregroundColor: AppTheme.backgroundColor,
+              backgroundColor: AppTheme.primaryColor,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(30)
+              )
+            ),
+            onPressed: (){}, 
+            icon: Icon(Icons.arrow_back)
+          ),
+        )
       ),
+      backgroundColor: AppTheme.backgroundColor,
+      body: SingleChildScrollView(
+        child: SafeArea(
+          child: Padding(
+            padding: EdgeInsets.only(left: 35, right: 35, bottom: 60),
+            child: Container(
+              height: 650,
+              width: 300,
+              decoration: BoxDecoration(
+                border: BoxBorder.all(
+                  color: Colors.black,
+                  width: 4
+                ),
+                color: AppTheme.primaryColor,
+              ),
+              child: Column(
+                spacing: 20,
+                children: [
+                  SizedBox(height: 60,),
+                  Text(
+                    "Enter team code",
+                    style: TextStyle(
+                      color: AppTheme.backgroundColor,
+                      fontSize: 25
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.all(20),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(30),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black,
+                            blurRadius: 5,
+                            offset: Offset(3, 4),
+                            spreadRadius: 2
+                          )
+                        ]
+                      ),
+                      child: TextFormField(
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20
+                        ),
+                        cursorColor: AppTheme.primaryColor,
+                        decoration: InputDecoration(
+                          hintStyle: TextStyle(color: Colors.white38),
+                          hintText: "Enter Room Code",
+                          filled: true,
+                          fillColor: AppTheme.backgroundColor,
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(30),
+                            borderSide: BorderSide.none
+                          )
+                        ),
+                      ),
+                    )
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(right: 20),
+                    child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Container(
+                          width: 50,
+                          height: 50,
+                          decoration: BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black,
+                                blurRadius: 8,
+                                offset: Offset(1, 3),
+                                spreadRadius: 1
+                              )
+                            ],
+                            color: AppTheme.backgroundColor,
+                            borderRadius: BorderRadius.circular(30)
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: 60,),
+                  HomeWidget.textButton(name: "Join Room", onPress: (){})
+
+                ],
+              ),
+            ),
+          ), 
+        ),
+      )
     );
-  }
-
-  void _joinRoom() async {
-    if (_formKey.currentState!.validate()) {
-      final controller = context.read<RoomController>();
-      await controller.joinRoom(
-        _roomCodeController.text.trim(),
-        _playerNameController.text.trim(),
-      );
-
-      if (controller.error == null && controller.currentRoom != null) {
-        Navigator.pushNamedAndRemoveUntil(
-          context,
-          AppRoutes.tasks,
-          (route) => false,
-          arguments: {
-            'roomCode': controller.currentRoom!.roomCode,
-            'playerId': 'current_player_id', // This should come from the join response
-          },
-        );
-      }
-    }
   }
 }
