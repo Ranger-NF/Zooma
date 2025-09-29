@@ -1,172 +1,102 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import '../controllers/task_controller.dart';
-import '../../../core/routes/app_routes.dart';
-import '../../../core/theme/app_theme.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:frontend/core/theme/app_theme.dart';
+import 'package:frontend/features/tasks/views/task_widget.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-class TasksPage extends StatefulWidget {
-  final String roomCode;
-  final String playerId;
-
-  const TasksPage({
-    super.key,
-    required this.roomCode,
-    required this.playerId,
-  });
+class TasksScreen extends StatefulWidget {
+  const TasksScreen({super.key});
 
   @override
-  State<TasksPage> createState() => _TasksPageState();
+  State<TasksScreen> createState() => _TasksScreenState();
 }
 
-class _TasksPageState extends State<TasksPage> {
+class _TasksScreenState extends State<TasksScreen> {
+  final PageController _controller = PageController();
+
   @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      context.read<TaskController>().loadPlayerTasks(widget.roomCode, widget.playerId);
-    });
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Tasks'),
-        centerTitle: true,
-        actions: [
-          IconButton(
-            onPressed: () => Navigator.pushNamed(
-              context,
-              AppRoutes.leaderboard,
-              arguments: {'roomCode': widget.roomCode},
+      body: Stack(
+        children: [
+          Positioned.fill(
+            child: SvgPicture.asset(
+              'assets/elements/task/task_screen.svg',
+              fit: BoxFit.cover,
             ),
-            icon: const Icon(Icons.leaderboard),
           ),
-        ],
-      ),
-      body: Consumer<TaskController>(
-        builder: (context, controller, child) {
-          if (controller.isLoading) {
-            return const Center(child: CircularProgressIndicator());
-          }
-
-          if (controller.error != null) {
-            return Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'Error: ${controller.error}',
-                    style: const TextStyle(color: Colors.red),
-                    textAlign: TextAlign.center,
-                  ),
-                  const SizedBox(height: 16),
-                  ElevatedButton(
-                    onPressed: () => controller.loadPlayerTasks(widget.roomCode, widget.playerId),
-                    child: const Text('Retry'),
-                  ),
-                ],
-              ),
-            );
-          }
-
-          if (controller.tasks.isEmpty) {
-            return const Center(
-              child: Text('No tasks available'),
-            );
-          }
-
-          return Column(
+          Row(
             children: [
               Container(
-                padding: const EdgeInsets.all(16),
-                color: AppTheme.primaryColor.withOpacity(0.1),
-                child: Row(
-                  children: [
-                    const Text(
-                      'Task 1',
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
+                color: Colors.transparent,
+                width: 360,
+                height: 90,
+                child: AppBar(
+                  centerTitle: true,
+                  title: Text(
+                    "Join Room",
+                    style: TextStyle(
+                      color: AppTheme.primaryColor,
+                      fontSize: 25
                     ),
-                    const Spacer(),
-                    ElevatedButton(
-                      onPressed: () => Navigator.pushNamed(
-                        context,
-                        AppRoutes.submit,
-                        arguments: {
-                          'roomCode': widget.roomCode,
-                          'playerId': widget.playerId,
-                          'taskId': controller.tasks.first.id,
-                        },
-                      ),
-                      child: const Text('Click Photo'),
-                    ),
-                  ],
-                ),
-              ),
-              Expanded(
-                child: Container(
-                  width: double.infinity,
-                  margin: const EdgeInsets.all(16),
-                  padding: const EdgeInsets.all(16),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(12),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.1),
-                        spreadRadius: 1,
-                        blurRadius: 5,
-                        offset: const Offset(0, 2),
-                      ),
-                    ],
                   ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        controller.tasks.first.title,
-                        style: const TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600,
-                        ),
+                  leadingWidth: 80,
+                  leading: Padding(
+                    padding: EdgeInsets.only(left: 30,bottom: 5),
+                    child: IconButton(
+                      style: IconButton.styleFrom(
+                        elevation: 20,
+                        foregroundColor: AppTheme.backgroundColor,
+                        backgroundColor: AppTheme.primaryColor,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30)
+                        )
                       ),
-                      const SizedBox(height: 8),
-                      Text(
-                        controller.tasks.first.description,
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: Colors.grey.shade600,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(16),
-                child: Row(
-                  children: [
-                    IconButton(
-                      onPressed: () {},
-                      icon: const Icon(Icons.arrow_back_ios),
+                      onPressed: (){}, 
+                      icon: Icon(Icons.arrow_back)
                     ),
-                    const Spacer(),
-                    const Text('1 of 5'),
-                    const Spacer(),
-                    IconButton(
-                      onPressed: () {},
-                      icon: const Icon(Icons.arrow_forward_ios),
-                    ),
-                  ],
+                  )
                 ),
-              ),
+              )
             ],
-          );
-        },
+          ),
+          
+          PageView(
+            controller: _controller,
+            children: const <Widget>[
+              TaskWidget(taskNumber: 1),
+              TaskWidget(taskNumber: 2),
+              TaskWidget(taskNumber: 3),
+              TaskWidget(taskNumber: 4),
+            ],
+          ),
+
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Padding(
+
+              padding: const EdgeInsets.only(bottom: 165.0), 
+              child: SmoothPageIndicator(
+                controller: _controller,
+                count: 4,
+                effect: WormEffect(
+                  dotHeight: 10,
+                  dotWidth: 10,
+                  activeDotColor: AppTheme.backgroundColor,
+                  dotColor: Colors.grey,
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
 }
+
