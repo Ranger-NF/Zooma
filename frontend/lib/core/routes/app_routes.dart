@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-// import 'package:frontend/features/home/views/home_page.dart';
+import 'package:frontend/features/home/views/home_page.dart';
 import 'package:frontend/features/register/view/register.dart';
 // import 'package:frontend/features/introduction/views/introduction_page.dart';
 // import 'package:frontend/features/splash/views/splash_screen.dart';
@@ -21,7 +21,7 @@ class AppRoutes {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case home:
-        return MaterialPageRoute(builder: (_) => RegisterScreen());
+        return MaterialPageRoute(builder: (_) => HomeScreen());
       case joinRoom:
         return MaterialPageRoute(builder: (_) => const JoinRoomPage());
       case createRoom:
