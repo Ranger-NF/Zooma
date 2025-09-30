@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:frontend/core/routes/app_routes.dart';
 import 'package:frontend/features/home/views/home_page.dart';
 
 class SplashScreen extends StatefulWidget{
@@ -55,10 +56,7 @@ class _StateSplashScreen extends State<SplashScreen>{
           });
       });
       Timer(Duration(seconds: 2), () {
-          Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(builder: (context) => HomeScreen()),
-          );
+        Navigator.pushNamed(context, AppRoutes.introduction);
       });
   }
 
