@@ -1,8 +1,12 @@
+
+import 'dart:async';
+
 import 'package:flutter/material.dart';
-//import 'package:flutter/scheduler.dart' show Ticker;
+import 'package:frontend/core/routes/app_routes.dart';
 import 'package:frontend/core/theme/app_theme.dart';
 import 'package:frontend/features/introduction/providers/introduction_provider.dart';
 import 'package:provider/provider.dart';
+import 'package:typewritertext/typewritertext.dart';
 
 class BackgroundAnimationScreen extends StatefulWidget {
   const BackgroundAnimationScreen({super.key});
@@ -42,6 +46,13 @@ class _BackgroundAnimationScreenState extends State<BackgroundAnimationScreen>
 
     _controller.repeat();
     provider.addBoxesPeriodically();
+    Timer(
+      Duration(seconds: 10),
+      (){
+        Navigator.pushNamed(context, AppRoutes.createRoom);
+        
+      }
+    );
   }
 
   @override
@@ -88,18 +99,18 @@ class _BackgroundAnimationScreenState extends State<BackgroundAnimationScreen>
                     child: Container(
                       width: 250,
                       height: 500,
+                      padding: EdgeInsets.all(20),
                       decoration: BoxDecoration(
                         color: AppTheme.backgroundColor,
                         borderRadius: BorderRadius.circular(20)
                       ),
-                      child: const Center(
-                        child: Text(
-                          'Foreground Container',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 16,
-                          ),
+                      child:  TypeWriter.text(
+                        'Foreground Container mmansdkjndakdnkasndkjnakdjn adsjnkdnasj saDNKASDMNADKSNKDNKNDJSKANFJDJmksajdfojaosfd sfdajkfdlsadfn dsfjdfndnsj',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
                         ),
+                        duration: Duration(milliseconds: 30),
                       ),
                     ),
                   ),
