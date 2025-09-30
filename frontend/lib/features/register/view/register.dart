@@ -20,30 +20,6 @@ class _StateRegisterPage extends State<RegisterScreen> with SingleTickerProvider
 
   final List<Map<String, dynamic>> _stickerData = [
     {
-      'path': 'assets/elements/register/Sticker1.svg',
-      'size': 30.0,
-      'top': 50.0,
-      'left': 30.0
-    },
-    {
-      'path': 'assets/elements/register/Sticker2.svg',
-      'size': 370.0,
-      'top': 20.0,
-      'right': 0.0
-    },
-    {
-      'path': 'assets/elements/register/Sticker3.svg',
-      'size': 340.0,
-      'bottom': 10.0,
-      'left': 0.0
-    },
-    {
-      'path': 'assets/elements/register/Sticker4.svg',
-      'size': 370.0,
-      'bottom': 180.0,
-      'right': 0.0
-    },
-    {
       'path': 'assets/elements/register/Sticker5.svg',
       'size': 75.0,
       'bottom': 30.0,
@@ -82,6 +58,12 @@ class _StateRegisterPage extends State<RegisterScreen> with SingleTickerProvider
       backgroundColor: Color(0xFFFDD259),
       body: Stack(
         children: [
+          Positioned.fill(
+            child: SvgPicture.asset(
+              'assets/elements/register/register_screen.svg',
+              fit: BoxFit.cover,
+            ),
+          ),
           ..._stickerData.asMap().entries.map((entry){
             int index = entry.key;
             Map<String, dynamic> data = entry.value;
