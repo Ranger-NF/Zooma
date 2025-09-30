@@ -35,15 +35,6 @@ class AppRoutes {
         return MaterialPageRoute(
           builder: (_) => TasksScreen(),
         );
-      case submit:
-        final args = settings.arguments as Map<String, dynamic>?;
-        return MaterialPageRoute(
-          builder: (_) => SubmitPage(
-            roomCode: args?['roomCode'] ?? '',
-            playerId: args?['playerId'] ?? '',
-            taskId: args?['taskId'] ?? '',
-          ),
-        );
       default:
         return MaterialPageRoute(
           builder: (_) => const Scaffold(
