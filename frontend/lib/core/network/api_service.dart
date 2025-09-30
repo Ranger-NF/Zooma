@@ -5,13 +5,13 @@ class ApiService {
   
   static final Dio _dio = Dio(
     BaseOptions(
-      baseUrl: "http://localhost:3000",
+      baseUrl: "http://127.0.0.1:8000/api/",
       connectTimeout: Duration(minutes: 2),
       receiveTimeout: Duration(minutes: 2),
     )
   )..interceptors.add(InterceptorsWrapper(
     onRequest: (options, handle) async{
-      final token = await TokenStorage.getToken();
+      final token = await TokenStorage.getToken("id");
       if(token != null){
         options.headers["Authorization"] = "Bearer $token";
       }
