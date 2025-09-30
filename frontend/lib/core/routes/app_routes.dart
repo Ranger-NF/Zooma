@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/features/home/views/home_page.dart';
+import 'package:frontend/features/introduction/views/introduction_page.dart';
 import 'package:frontend/features/register/view/register.dart';
+import 'package:frontend/features/splash/views/splash_screen.dart';
 // import 'package:frontend/features/introduction/views/introduction_page.dart';
 // import 'package:frontend/features/splash/views/splash_screen.dart';
 import '../../features/room/views/join_room_page.dart';
@@ -17,11 +19,12 @@ class AppRoutes {
   static const String tasks = '/tasks';
   static const String submit = '/submit';
   static const String register = '/register';
+  static const String introduction = '/introduction';
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case home:
-        return MaterialPageRoute(builder: (_) => RegisterScreen());
+        return MaterialPageRoute(builder: (_) => SplashScreen());
       case joinRoom:
         return MaterialPageRoute(builder: (_) => JoinRoomScreen());
       case createRoom:
@@ -34,6 +37,10 @@ class AppRoutes {
       case tasks:
         return MaterialPageRoute(
           builder: (_) => TasksScreen(),
+        );
+      case introduction:
+        return MaterialPageRoute(
+          builder: (_) => BackgroundAnimationScreen()
         );
       default:
         return MaterialPageRoute(
