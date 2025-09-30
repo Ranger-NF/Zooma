@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/core/theme/app_theme.dart';
+import 'package:frontend/features/register/controller/register_controller.dart';
 
 class RegisterWidget {
   static Widget registerWidget({
+    required RegisterController rController,
     required TextEditingController controller,
+    required BuildContext context,
   }){
     return LayoutBuilder(
       builder: (BuildContext ctx, BoxConstraints view){
@@ -37,6 +40,10 @@ class RegisterWidget {
                     ),
                     elevation: 50,
                     child: TextFormField(
+                      textInputAction: TextInputAction.done,
+                      onFieldSubmitted: (value){
+                        rController.submitRegister(context, value);
+                      },
                       controller: controller,
                       style: TextStyle(
                         color: AppTheme.backgroundColor,
