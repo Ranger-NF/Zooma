@@ -80,7 +80,6 @@ class _TasksScreenState extends State<TasksScreen> {
           Align(
             alignment: Alignment.bottomCenter,
             child: Padding(
-
               padding: const EdgeInsets.only(bottom: 165.0), 
               child: SmoothPageIndicator(
                 controller: _controller,
