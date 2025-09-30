@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:frontend/core/di/dependency_injection.dart';
+import 'package:frontend/features/register/controller/register_controller.dart';
 import 'package:frontend/features/register/view/register_widget.dart';
 
 class RegisterScreen extends StatefulWidget{
@@ -11,6 +13,9 @@ class _StateRegisterPage extends State<RegisterScreen> with SingleTickerProvider
 
   late AnimationController _animationController;
   final TextEditingController _controller = TextEditingController();
+
+  late final RegisterController rController;
+
 
 
   final List<Map<String, dynamic>> _stickerData = [
@@ -60,6 +65,7 @@ class _StateRegisterPage extends State<RegisterScreen> with SingleTickerProvider
       vsync: this
     );
     _animationController.forward();
+    rController = getIt<RegisterController>();
   }
 
   @override 
@@ -104,7 +110,11 @@ class _StateRegisterPage extends State<RegisterScreen> with SingleTickerProvider
 
           }),
 
-          RegisterWidget.registerWidget(controller: _controller)
+          RegisterWidget.registerWidget(
+            controller: _controller,
+            rController: rController,
+            context: context
+          )
 
         ],
       ),
