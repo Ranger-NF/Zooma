@@ -11,8 +11,8 @@ A modern, real-time multiplayer game where players complete photo-based tasks in
   <img src="docs/screenshots/splash.png" width="200" alt="splash"/>
   <img src="docs/screenshots/register.png" width="200" alt="register"/>
   <img src="docs/screenshots/home.png" width="200" alt="home"/>
-  <img src="screenshots/create.png" width="200" alt="create"/>
-  <img src="screenshots/join.png" width="200" alt="join"/>
+  <img src="docs/screenshots/create.png" width="200" alt="create"/>
+  <img src="docs/screenshots/join.png" width="200" alt="join"/>
 </div>
 
 ## ✨ Features
