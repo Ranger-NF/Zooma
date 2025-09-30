@@ -46,7 +46,7 @@ class BoxProvider with ChangeNotifier {
         timer.cancel();
         return;
       }
-      final int boxesToAdd = _random.nextInt(3) + 1;
+      final int boxesToAdd = _random.nextInt(3) + 2;
       for (int i = 0; i < boxesToAdd; i++) {
         addBox();
       }
