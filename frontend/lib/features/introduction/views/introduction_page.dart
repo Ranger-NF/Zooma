@@ -1,4 +1,3 @@
-
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -18,8 +17,6 @@ class BackgroundAnimationScreen extends StatefulWidget {
 
 class _BackgroundAnimationScreenState extends State<BackgroundAnimationScreen>
     with TickerProviderStateMixin {
-
-
   List images = [
     "assets/elements/element1.png",
     "assets/elements/element2.png",
@@ -27,9 +24,9 @@ class _BackgroundAnimationScreenState extends State<BackgroundAnimationScreen>
     "assets/elements/element5.png",
     "assets/elements/element6.png"
   ];
-  
-  late AnimationController _controller;
 
+  late AnimationController _controller;
+  Timer? _navigationTimer;
 
   @override
   void initState() {
@@ -46,23 +43,28 @@ class _BackgroundAnimationScreenState extends State<BackgroundAnimationScreen>
 
     _controller.repeat();
     provider.addBoxesPeriodically();
-    Timer(
-      Duration(seconds: 10),
-      (){
-        Navigator.pushNamed(context, AppRoutes.createRoom);
-        
-      }
+
+    _navigationTimer = Timer(
+      const Duration(seconds: 10),
+      () {
+        if (mounted) {
+           Navigator.pushNamed(context, AppRoutes.register);
+        }
+      },
     );
   }
 
   @override
   void dispose() {
     _controller.dispose();
+    _navigationTimer?.cancel();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    const double boxWidth = 96.82;
+
     return Scaffold(
       backgroundColor: AppTheme.surfaceColor,
       body: LayoutBuilder(
@@ -71,15 +73,14 @@ class _BackgroundAnimationScreenState extends State<BackgroundAnimationScreen>
             builder: (context, boxProvider, _) {
               return Stack(
                 children: [
-                  // Background falling boxes
                   ...boxProvider.boxes.map((box) {
                     return Positioned(
-                      left: box.x * (constraints.maxWidth - 120.0),
+                      left: box.x * (constraints.maxWidth - boxWidth), // Using boxWidth makes it more accurate
                       top: box.y,
                       child: Transform.rotate(
                         angle: box.rotation,
                         child: Container(
-                          width: 96.82,
+                          width: boxWidth,
                           height: 111.47,
                           decoration: BoxDecoration(
                             color: AppTheme.backgroundColor,
@@ -93,24 +94,21 @@ class _BackgroundAnimationScreenState extends State<BackgroundAnimationScreen>
                       ),
                     );
                   }),
-
-                  // Foreground container
                   Center(
                     child: Container(
                       width: 250,
                       height: 500,
-                      padding: EdgeInsets.all(20),
+                      padding: const EdgeInsets.all(20),
                       decoration: BoxDecoration(
-                        color: AppTheme.backgroundColor,
-                        borderRadius: BorderRadius.circular(20)
-                      ),
-                      child:  TypeWriter.text(
+                          color: AppTheme.backgroundColor,
+                          borderRadius: BorderRadius.circular(20)),
+                      child: TypeWriter.text(
                         'Foreground Container mmansdkjndakdnkasndkjnakdjn adsjnkdnasj saDNKASDMNADKSNKDNKNDJSKANFJDJmksajdfojaosfd sfdajkfdlsadfn dsfjdfndnsj',
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: Colors.white,
                           fontSize: 16,
                         ),
-                        duration: Duration(milliseconds: 30),
+                        duration: const Duration(milliseconds: 30),
                       ),
                     ),
                   ),
