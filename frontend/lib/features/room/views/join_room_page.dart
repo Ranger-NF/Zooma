@@ -42,7 +42,9 @@ class _StateJoinRoomScreen extends State<JoinRoomScreen>{
                 borderRadius: BorderRadius.circular(30)
               )
             ),
-            onPressed: (){}, 
+            onPressed: (){
+              Navigator.pop(context);
+            }, 
             icon: Icon(Icons.arrow_back)
           ),
         )

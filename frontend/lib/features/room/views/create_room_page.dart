@@ -27,7 +27,9 @@ class CreateRoomScreen extends StatelessWidget{
                 borderRadius: BorderRadius.circular(30)
               )
             ),
-            onPressed: (){}, 
+            onPressed: (){
+              Navigator.pop(context);
+            }, 
             icon: Icon(Icons.arrow_back)
           ),
         )
