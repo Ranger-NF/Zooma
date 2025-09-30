@@ -1,26 +1,24 @@
-# 🎮 Bingo Game - Real-time Photo Challenge App
+# 🎮 Zooma - Real-time Photo Challenge App
 
 [![Flutter](https://img.shields.io/badge/Flutter-3.0+-blue.svg)](https://flutter.dev/)
-[![Node.js](https://img.shields.io/badge/Node.js-18+-green.svg)](https://nodejs.org/)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.0+-blue.svg)](https://www.typescriptlang.org/)
-[![MongoDB](https://img.shields.io/badge/MongoDB-6.0+-green.svg)](https://www.mongodb.com/)
-[![Socket.IO](https://img.shields.io/badge/Socket.IO-4.7+-black.svg)](https://socket.io/)
+[![Django](https://img.shields.io/badge/Django-5.2-green.svg)](https://www.djangoproject.com/)
 
-A modern, real-time multiplayer Bingo game where players complete photo-based tasks in teams, with mentors reviewing submissions and managing leaderboards.
+A modern, real-time multiplayer game where players complete photo-based tasks in teams, with mentors reviewing submissions and managing leaderboards.
 
 ## 📱 Screenshots
 
 <div align="center">
-  <img src="docs/screenshots/HomePage.png" width="200" alt="Home Screen"/>
-  <img src="docs/screenshots/Create Room.png" width="200" alt="Tasks Screen"/>
-  <img src="docs/screenshots/Join Room.png" width="200" alt="Leaderboard"/>
-  <img src="screenshots/mentor.png" width="200" alt="Mentor Dashboard"/>
+  <img src="docs/screenshots/splash.png" width="200" alt="splash"/>
+  <img src="docs/screenshots/register.png" width="200" alt="register"/>
+  <img src="docs/screenshots/home.png" width="200" alt="home"/>
+  <img src="screenshots/create.png" width="200" alt="create"/>
+  <img src="screenshots/join.png" width="200" alt="join"/>
 </div>
 
 ## ✨ Features
 
 ### 🎯 Core Gameplay
-- **Room-based multiplayer** - Mentors create rooms, players join with codes
+- **Room-based multiplayer** - Mentors create room, players join with room codes
 - **Photo-based tasks** - Players complete challenges by taking photos
 - **Real-time updates** - Live scoring, leaderboards, and notifications
 - **Mentor approval system** - Review and approve/reject task submissions
@@ -28,46 +26,9 @@ A modern, real-time multiplayer Bingo game where players complete photo-based ta
 
 ### 🚀 Technical Features
 - **Cross-platform mobile app** - Built with Flutter
-- **Real-time communication** - Socket.IO for instant updates
 - **Image processing** - Automatic photo optimization and compression
 - **Secure file handling** - Validated uploads with size/type restrictions
 - **RESTful API** - Clean, documented backend endpoints
-- **MongoDB integration** - Scalable NoSQL database
-
-
-## 🚀 Quick Start
-
-### Prerequisites
-- Node.js 18+
-- Flutter 3.0+
-- MongoDB (local or Atlas)
-- Android Studio/Xcode for mobile development
-
-### 📦 Installation
-
-1. **Clone the repository**
-```bash
-git clone https://github.com/yourusername/bingo-game.git
-cd bingo-game
-```
-
-2. **Backend Setup**
-```bash
-cd backend
-npm install
-cp .env.example .env
-# Configure your MongoDB URI in .env
-npm run dev
-```
-
-3. **Frontend Setup**
-```bash
-cd frontend
-flutter pub get
-flutter run
-```
-
-
 
 ## 🎮 How to Play
 
@@ -84,127 +45,6 @@ flutter run
 3. **Submit Photos** - Upload images for mentor review
 4. **Earn Points** - Get scored based on approved submissions
 5. **Climb Leaderboard** - Compete with other players
-
-## 📊 API Documentation
-
-### 🏠 Room Management
-
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| `POST` | `/api/rooms` | Create new room (mentor) |
-| `POST` | `/api/rooms/:code/join` | Join existing room (player) |
-| `GET` | `/api/rooms/:code` | Get room details |
-| `GET` | `/api/rooms/:code/leaderboard` | Get current leaderboard |
-
-### 📸 Task Management
-
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| `POST` | `/api/tasks/:taskId/submit` | Submit task photo |
-| `POST` | `/api/tasks/:taskId/review` | Approve/reject submission |
-| `GET` | `/api/tasks/submissions/:roomCode` | Get pending submissions |
-
-### 🔄 Real-time Events
-
-| Event | Direction | Description |
-|-------|-----------|-------------|
-| `joinRoom` | Client → Server | Join room for updates |
-| `roomUpdated` | Server → Client | Room state changed |
-| `taskSubmitted` | Server → Client | New task submission |
-| `taskReviewed` | Server → Client | Submission approved/rejected |
-
-## 🗂️ Project Structure
-
-```
-bingo-game/
-├── 📱 frontend/                 # Flutter mobile app
-│   ├── lib/
-│   │   ├── models/             # Data models
-│   │   ├── screens/            # UI screens
-│   │   ├── services/           # API & business logic
-│   │   └── main.dart           # App entry point
-│   └── pubspec.yaml            # Flutter dependencies
-├── 🚀 backend/                 # Express.js API server
-│   ├── src/
-│   │   ├── models/             # MongoDB schemas
-│   │   ├── routes/             # API endpoints
-│   │   └── server.ts           # Server entry point
-│   ├── uploads/                # Image storage
-│   └── package.json            # Node.js dependencies
-└── 📚 docs/                    # Documentation
-```
-
-## 🔧 Development
-
-### Running in Development Mode
-
-**Backend:**
-```bash
-cd backend
-npm run dev  # Runs with nodemon for auto-restart
-```
-
-**Frontend:**
-```bash
-cd frontend
-flutter run  # Hot reload enabled
-```
-
-### Building for Production
-
-**Backend:**
-```bash
-npm run build  # Compile TypeScript
-npm start      # Run compiled JavaScript
-```
-
-**Frontend:**
-```bash
-flutter build apk              # Android
-flutter build ios              # iOS
-flutter build web              # Web (if needed)
-```
-
-## 🧪 Testing
-
-```bash
-# Backend tests
-cd backend
-npm test
-
-# Frontend tests
-cd frontend
-flutter test
-
-# Integration tests
-flutter integration_test
-```
-
-### Mobile App Deployment
-
-1. **Android**: Build APK and upload to Google Play Store
-2. **iOS**: Build IPA and upload to App Store Connect
-
-## 🛠️ Tech Stack
-
-### Frontend
-- **Flutter** - Cross-platform mobile framework
-- **Dart** - Programming language
-- **Provider** - State management
-- **Socket.IO Client** - Real-time communication
-- **Image Picker** - Camera integration
-- **HTTP** - API communication
-
-### Backend
-- **Node.js** - Runtime environment
-- **Express.js** - Web framework
-- **TypeScript** - Type-safe JavaScript
-- **Socket.IO** - WebSocket communication
-- **MongoDB** - NoSQL database
-- **Mongoose** - MongoDB object modeling
-- **Multer** - File upload handling
-- **Sharp** - Image processing
-
 ## 🤝 Contributing
 
 We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for details.
@@ -225,26 +65,8 @@ We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) f
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 🙏 Acknowledgments
-
-- **Flutter Team** - For the amazing cross-platform framework
-- **Express.js Community** - For the robust web framework
-- **MongoDB** - For the flexible database solution
-- **Socket.IO** - For real-time communication capabilities
-
 ## 📞 Support
 - 🐛 **Issues**: [GitHub Issues](https://github.com/Muflih-uk/Bingo/issues)
-
-## 🔮 Roadmap
-
-- [ ] **Web Dashboard** - Browser-based mentor interface
-- [ ] **Custom Tasks** - Mentors can create custom challenges
-- [ ] **Team Mode** - Multiple teams competing
-- [ ] **Achievement System** - Badges and rewards
-- [ ] **Analytics Dashboard** - Game statistics and insights
-- [ ] **Offline Mode** - Play without internet connection
-- [ ] **Video Tasks** - Support for video submissions
-- [ ] **AR Integration** - Augmented reality challenges
 
 ---
 
