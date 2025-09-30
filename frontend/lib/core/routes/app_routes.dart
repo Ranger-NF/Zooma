@@ -21,11 +21,11 @@ class AppRoutes {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case home:
-        return MaterialPageRoute(builder: (_) => TasksScreen());
+        return MaterialPageRoute(builder: (_) => RegisterScreen());
       case joinRoom:
         return MaterialPageRoute(builder: (_) => JoinRoomScreen());
       case createRoom:
-        return MaterialPageRoute(builder: (_) => CreateRoomScreen());
+        return MaterialPageRoute(builder: (_) => HomeScreen());
       case leaderboard:
         final args = settings.arguments as Map<String, dynamic>?;
         return MaterialPageRoute(
