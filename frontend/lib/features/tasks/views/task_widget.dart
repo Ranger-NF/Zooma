@@ -48,7 +48,6 @@ class TaskWidget extends StatelessWidget {
             ),
           ),
           
-          // --- Submit Button ---
           Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -75,12 +74,29 @@ class TaskWidget extends StatelessWidget {
                     ),
                   ],
                 ),
-                child: const Icon(Icons.camera_alt, color: Colors.white, size: 32),
+                child: IconButton(
+                  onPressed:(){
+                    showDialog(
+                      context: context, 
+                      builder: (BuildContext context){
+                        return dialog();
+                      }
+                    );
+                  }, 
+                  icon: Icon(Icons.camera_alt, color: Colors.white, size: 32,),
+                ) 
               ),
             ],
           ),
         ],
       ),
+    );
+  }
+
+
+  static Dialog dialog(){
+    return Dialog(
+      child: Scaffold(),
     );
   }
 }
