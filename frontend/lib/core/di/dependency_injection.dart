@@ -1,3 +1,5 @@
+import 'package:frontend/features/register/controller/register_controller.dart';
+import 'package:frontend/features/register/service/register_service.dart';
 import 'package:get_it/get_it.dart';
 import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -28,11 +30,13 @@ class DependencyInjection {
     getIt.registerSingleton<LeaderboardService>(LeaderboardService(getIt<ApiService>()));
     getIt.registerSingleton<TaskService>(TaskService(getIt<ApiService>()));
     getIt.registerSingleton<SubmissionService>(SubmissionService(getIt<ApiService>()));
+    getIt.registerSingleton<RegisterService>(RegisterService(getIt<ApiService>()));
 
     // Controllers
     getIt.registerFactory<RoomController>(() => RoomController(getIt<RoomService>()));
     getIt.registerFactory<LeaderboardController>(() => LeaderboardController(getIt<LeaderboardService>()));
     getIt.registerFactory<TaskController>(() => TaskController(getIt<TaskService>()));
     getIt.registerFactory<SubmissionController>(() => SubmissionController(getIt<SubmissionService>()));
+    getIt.registerFactory<RegisterController>(() => RegisterController(getIt<RegisterService>()));
   }
 }
