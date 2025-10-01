@@ -1,35 +1,35 @@
 
 import '../../../core/network/api_service.dart';
-import '../models/room_model.dart';
 
 class RoomService {
   final ApiService apiService;
 
   RoomService(this.apiService);
 
-  Future<Room> createRoom(String roomName, int roomSize, String mentorName) async {
+  Future<String> createRoom({required int numberOfQuestion,required int maxPlayers, required String id}) async {
     final response = await apiService.post(
-      '/api/rooms/create', 
+      'room/create/', 
       data: {
-        'mentorName': mentorName,
-        'roomName': roomName,
+        "mentor_id": id,
+        "max_players": maxPlayers,
+        "num_questions": numberOfQuestion
       }
     );
-    return Room.fromJson(response.data);
+    return response.data["code"];
   }
 
-  Future<Room> joinRoom(String roomCode, String playerName) async {
-    final response = await apiService.post('/api/rooms/join', data: {
-      'roomCode': roomCode,
-      //'roomName': roomName
-    });
-    return Room.fromJson(response.data);
-  }
+  // Future<Room> joinRoom(String roomCode, String playerName) async {
+  //   final response = await apiService.post('/api/rooms/join', data: {
+  //     'roomCode': roomCode,
+  //     //'roomName': roomName
+  //   });
+  //   return Room.fromJson(response.data);
+  // }
 
-  Future<Room> getRoomDetails(String roomCode) async {
-    final response = await apiService.get('/api/rooms/$roomCode');
-    return Room.fromJson(response.data);
-  }
+  // Future<Room> getRoomDetails(String roomCode) async {
+  //   final response = await apiService.get('/api/rooms/$roomCode');
+  //   return Room.fromJson(response.data);
+  // }
 
   // Future<void> updateRoomStatus(String roomCode, String status) async {
   //   await apiService.put('/api/rooms/$roomCode/status', data: {
@@ -37,8 +37,4 @@ class RoomService {
   //   });
   // }
 
-  Future<Room> getRoomUpdates(String roomCode) async {
-    final response = await apiService.get('/api/rooms/$roomCode/updates');
-    return Room.fromJson(response.data);
-  }
 }
