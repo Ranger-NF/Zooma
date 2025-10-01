@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/core/di/dependency_injection.dart';
 import 'package:frontend/core/theme/app_theme.dart';
 import 'package:frontend/features/home/views/home_widget.dart';
+import 'package:frontend/features/room/controllers/room_controller.dart';
+import 'package:provider/provider.dart';
 
 class CreateRoomScreen extends StatelessWidget{
+
+  final RoomController controller = getIt<RoomController>();
+
   @override
   Widget build(BuildContext context) {
+    final counter = context.watch<RoomController>();
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -62,7 +69,9 @@ class CreateRoomScreen extends StatelessWidget{
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     IconButton(
-                      onPressed: (){}, 
+                      onPressed: (){
+                        counter.roomSizeDecrement();
+                      }, 
                       icon: Padding(
                         padding: EdgeInsets.only(bottom: 16),
                         child: Icon(
@@ -80,7 +89,7 @@ class CreateRoomScreen extends StatelessWidget{
                       ),
                       child: Center(
                         child: Text(
-                          "1",
+                          "${counter.roomSize}",
                           style: TextStyle(
                             color: AppTheme.primaryColor,
                             fontSize: 30
@@ -89,7 +98,9 @@ class CreateRoomScreen extends StatelessWidget{
                       ),
                     ),
                     IconButton(
-                      onPressed: (){}, 
+                      onPressed: (){
+                        counter.roomSizeIncrement();
+                      }, 
                       icon: Center(
                         child: Icon(
                           Icons.add,
@@ -136,7 +147,9 @@ class CreateRoomScreen extends StatelessWidget{
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     IconButton(
-                      onPressed: (){}, 
+                      onPressed: (){
+                        counter.numberOfQuestionDecrement();
+                      }, 
                       icon: Padding(
                         padding: EdgeInsets.only(bottom: 16),
                         child: Icon(
@@ -154,7 +167,7 @@ class CreateRoomScreen extends StatelessWidget{
                       ),
                       child: Center(
                         child: Text(
-                          "1",
+                          "${counter.numberOfQuestion}",
                           style: TextStyle(
                             color: AppTheme.primaryColor,
                             fontSize: 30
@@ -163,7 +176,9 @@ class CreateRoomScreen extends StatelessWidget{
                       ),
                     ),
                     IconButton(
-                      onPressed: (){}, 
+                      onPressed: (){
+                        counter.numberOfQuestionIncrement();
+                      }, 
                       icon: Center(
                         child: Icon(
                           Icons.add,
@@ -174,7 +189,13 @@ class CreateRoomScreen extends StatelessWidget{
                     ),
                   ],
                 ),
-                HomeWidget.textButton(name: "Generate code", onPress: (){})
+                HomeWidget.textButton(name: "Generate code", onPress: (){
+                  controller.createRoom(
+                    counter.numberOfQuestion, 
+                    counter.roomSize,
+                    context
+                  );
+                })
 
               ],
             ),
