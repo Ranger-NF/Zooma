@@ -2,7 +2,7 @@ type: http_request
 model: http_request
 id: rq_m2hmqFersj
 createdAt: 2025-09-14T17:44:21.600336573
-updatedAt: 2025-09-20T06:49:00.878813568
+updatedAt: 2025-10-01T07:17:19.749089
 workspaceId: wk_iYwvchmhb7
 folderId: fl_i9tjLGyhD7
 authentication: {}
@@ -10,7 +10,7 @@ authenticationType: null
 body:
   text: |-
     {
-      "username": "Muflih"
+      "username": "Fahad"
     }
 bodyType: application/json
 description: ''
@@ -22,5 +22,5 @@ headers:
 method: POST
 name: Create a Player
 sortPriority: 999.9999
-url: http://127.0.0.1:8000/api/player/create/
+url: ${[ SERVER_URL ]}/api/player/create/
 urlParameters: []

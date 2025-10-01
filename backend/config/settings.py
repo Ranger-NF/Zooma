@@ -134,3 +134,8 @@ REST_FRAMEWORK = {
     # Add custom exception handler if you have one in core/exceptions.py
     # 'EXCEPTION_HANDLER': 'core.exceptions.custom_exception_handler',
 }
+
+SECURE_SSL_REDIRECT = True
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
