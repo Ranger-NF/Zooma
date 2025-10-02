@@ -2,7 +2,7 @@ type: http_request
 model: http_request
 id: rq_VtUhU7MVQA
 createdAt: 2025-09-20T06:27:06.911844187
-updatedAt: 2025-09-20T06:49:17.933309738
+updatedAt: 2025-10-01T07:36:18.708730
 workspaceId: wk_iYwvchmhb7
 folderId: fl_D7tRoptu8H
 authentication: {}
@@ -23,5 +23,5 @@ headers:
 method: POST
 name: Koin Room
 sortPriority: 1000.0008
-url: http://127.0.0.1:8000/api/room/join/
+url: ${[ SERVER_URL ]}/api/room/join/
 urlParameters: []

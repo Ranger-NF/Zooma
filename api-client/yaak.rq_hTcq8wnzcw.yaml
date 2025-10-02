@@ -2,7 +2,7 @@ type: http_request
 model: http_request
 id: rq_hTcq8wnzcw
 createdAt: 2025-09-20T06:35:51.800736676
-updatedAt: 2025-09-25T13:40:10.358517338
+updatedAt: 2025-10-01T07:36:12.521822
 workspaceId: wk_iYwvchmhb7
 folderId: fl_D7tRoptu8H
 authentication: {}
@@ -24,5 +24,5 @@ headers:
 method: POST
 name: Control Game
 sortPriority: 1000.0028
-url: http://127.0.0.1:8000/api/room/control/
+url: ${[ SERVER_URL ]}/api/room/control/
 urlParameters: []

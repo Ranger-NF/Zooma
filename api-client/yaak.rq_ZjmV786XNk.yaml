@@ -2,7 +2,7 @@ type: http_request
 model: http_request
 id: rq_ZjmV786XNk
 createdAt: 2025-09-20T06:27:21.581790668
-updatedAt: 2025-09-20T06:50:26.782841915
+updatedAt: 2025-10-01T07:36:47.842092
 workspaceId: wk_iYwvchmhb7
 folderId: fl_6GhLfwQLiF
 authentication: {}
@@ -24,5 +24,5 @@ headers:
 method: PATCH
 name: Evaluate the Answer
 sortPriority: 1000.0027
-url: http://127.0.0.1:8000/api/game/evaluate/
+url: ${[ SERVER_URL ]}/api/game/evaluate/
 urlParameters: []
