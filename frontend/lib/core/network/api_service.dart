@@ -5,7 +5,7 @@ class ApiService {
   
   static final Dio _dio = Dio(
     BaseOptions(
-      baseUrl: "http://127.0.0.1:8000/api/",
+      baseUrl: "https://zooma.ranger.hackclub.app/api/",
       connectTimeout: Duration(minutes: 2),
       receiveTimeout: Duration(minutes: 2),
     )
