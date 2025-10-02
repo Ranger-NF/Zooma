@@ -2,7 +2,7 @@ type: http_request
 model: http_request
 id: rq_pKSJFxH8Z8
 createdAt: 2025-09-20T06:26:56.962109713
-updatedAt: 2025-09-20T06:49:11.277258290
+updatedAt: 2025-10-02T14:28:50.662973297
 workspaceId: wk_iYwvchmhb7
 folderId: fl_D7tRoptu8H
 authentication: {}
@@ -10,7 +10,7 @@ authenticationType: null
 body:
   text: |-
     {
-      "mentor_id": "0e99cee1-f776-4609-8bcd-2f160e30db46",
+      "mentor_id": ${[ id ]},
       "max_players": 5,
       "num_questions": 5
     }
@@ -24,5 +24,5 @@ headers:
 method: POST
 name: Create Room
 sortPriority: 999.9998
-url: http://127.0.0.1:8000/api/room/create/
+url: ${[ BASE_URL ]}room/create/
 urlParameters: []

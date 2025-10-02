@@ -2,7 +2,7 @@ type: http_request
 model: http_request
 id: rq_m2hmqFersj
 createdAt: 2025-09-14T17:44:21.600336573
-updatedAt: 2025-09-20T06:49:00.878813568
+updatedAt: 2025-10-02T14:25:34.226716646
 workspaceId: wk_iYwvchmhb7
 folderId: fl_i9tjLGyhD7
 authentication: {}
@@ -22,5 +22,5 @@ headers:
 method: POST
 name: Create a Player
 sortPriority: 999.9999
-url: http://127.0.0.1:8000/api/player/create/
+url: ${[ BASE_URL ]}player/create/
 urlParameters: []
