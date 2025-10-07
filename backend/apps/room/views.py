@@ -20,7 +20,7 @@ class RoomCreateAPIView(generics.CreateAPIView):
     def perform_create(self, serializer):
         request = cast(Request, self.request)
         mentor_id = request.data.get("mentor_id")
-        num_questions = int(request.data.get('num_questions', 5))
+        num_questions = int(request.data.get('num_questions'))
         mentor = Player.objects.get(id=mentor_id)
         room = serializer.save(mentor=mentor)
         room.players.add(mentor)

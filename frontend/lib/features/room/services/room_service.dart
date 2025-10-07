@@ -6,17 +6,30 @@ class RoomService {
 
   RoomService(this.apiService);
 
-  Future<String> createRoom({required int numberOfQuestion,required int maxPlayers, required String id}) async {
-    final response = await apiService.post(
-      'room/create/', 
-      data: {
-        "mentor_id": id,
-        "max_players": maxPlayers,
-        "num_questions": numberOfQuestion
+  Future<String> createRoom({
+    required int numberOfQuestion,
+    required int maxPlayers,
+    required String id,
+  }) async {
+    try {
+      final response = await apiService.post(
+        'room/create/',
+        data: {
+          "mentor_id": id,
+          "max_players": maxPlayers,
+          "num_questions": numberOfQuestion
+        }
+      );
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        return response.data["code"];
       }
-    );
-    return response.data["code"];
+      return "Could not Generate Code";
+    } catch (e) {
+      print("Error while creating room: $e");
+      return "Error";
+    }
   }
+
 
   // Future<Room> joinRoom(String roomCode, String playerName) async {
   //   final response = await apiService.post('/api/rooms/join', data: {

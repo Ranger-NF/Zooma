@@ -23,7 +23,6 @@ class RoomController extends ChangeNotifier {
     _setLoading(true);
     try {
       String? id = await TokenStorage.getToken("id");
-      print(id);
       if(id != null){
         String code = await _roomService.createRoom(
           id: id,
