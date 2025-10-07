@@ -17,7 +17,7 @@ class RegisterController {
 
     final res = await registerService.submitRegister(value);
     if(res.isNotEmpty){
-      TokenStorage.saveToken(tokenKey: 'id', tokenValue: res);
+      await TokenStorage.saveToken(tokenKey: 'id', tokenValue: res);
       Navigator.pushNamed(context,AppRoutes.initial);
     } else{
       _showSnackBar(context, 'User Registration Failed');
